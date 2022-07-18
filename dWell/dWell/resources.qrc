@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/Go-previous.svg</file>
+        <file>icons/List-add.svg</file>
+        <file>icons/List-remove.svg</file>
+        <file>icons/Emblem-system.svg</file>
+        <file>icons/Go-home-2.svg</file>
+        <file>icons/Tango-style_info_icon.svg</file>
+        <file>icons/System-users.svg</file>
+        <file>icons/Format-justify-center.svg</file>
+        <file>icons/Go-jump.svg</file>
+    </qresource>
+</RCC>

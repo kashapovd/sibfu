@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.18"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Toynote: Исходный файл editnotedialog.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Toynote
+   </div>
+   <div id="projectbrief">A toy note application</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.18 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">editnotedialog.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="editnotedialog_8hpp.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef EDITNOTEDIALOG_HPP</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define EDITNOTEDIALOG_HPP</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span> <span class="comment">// unique_ptr</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// Объявляем класс Note, чтобы ниже можно было упоминать указатели на него,</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// не включая определение класса. Это увеличивает скорость сборки проекта за</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// счёт уменьшения количества обрабатываемых заголовочных файлов.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span><a class="code" href="classNote.html">Note</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// Объявляем класс Ui::EditNoteDialog, чтобы ниже можно было упоминать указатели на него,</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// не включая определение класса. Этот класс создаётся автоматически из UI-файла.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// Данное объявление также было создано автоматически, когда Qt Creator</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// добавлял в проект UI-файл и класс для него.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>Ui {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="classEditNoteDialog.html">EditNoteDialog</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classEditNoteDialog.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEditNoteDialog.html">EditNoteDialog</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classEditNoteDialog.html#aae78f19fa974f2996bcc47cc76d52bf3">EditNoteDialog</a>(QWidget *parent = 0);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classEditNoteDialog.html#a23d38b3907579e28177ad37d3527b590">~EditNoteDialog</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classNote.html">Note</a> *<a class="code" href="classEditNoteDialog.html#a336757989a11c8d2e9d0f8bce5dda90c">note</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEditNoteDialog.html#ab8110a8c4d13cdd5961ca16624750d1d">setNote</a>(<a class="code" href="classNote.html">Note</a> *<a class="code" href="classEditNoteDialog.html#a336757989a11c8d2e9d0f8bce5dda90c">note</a>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEditNoteDialog.html#a35c8b7f7ca891163b99d2408704c89d7">setNoteForEdit</a>(<a class="code" href="classNote.html">Note</a> *<a class="code" href="classEditNoteDialog.html#a336757989a11c8d2e9d0f8bce5dda90c">note</a>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEditNoteDialog.html#a8674d8616c0f5b47baa78b244eb44322">accept</a>() Q_DECL_OVERRIDE;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classEditNoteDialog.html#a630a563957487f7ad63035265b501b68">   80</a></span>&#160;    Ui::EditNoteDialog *<a class="code" href="classEditNoteDialog.html#a630a563957487f7ad63035265b501b68">mUi</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classEditNoteDialog.html#af96cbe6d3b52db3dc5e7c4c22a31e358">   82</a></span>&#160;    <a class="code" href="classNote.html">Note</a> *<a class="code" href="classEditNoteDialog.html#af96cbe6d3b52db3dc5e7c4c22a31e358">mNote</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classEditNoteDialog.html#a1dce8d429f817b345fb9a0e7665aeb31">   87</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classEditNoteDialog.html#a1dce8d429f817b345fb9a0e7665aeb31">notNewNote</a>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif // EDITNOTEDIALOG_HPP</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassEditNoteDialog_html_a630a563957487f7ad63035265b501b68"><div class="ttname"><a href="classEditNoteDialog.html#a630a563957487f7ad63035265b501b68">EditNoteDialog::mUi</a></div><div class="ttdeci">Ui::EditNoteDialog * mUi</div><div class="ttdoc">Указатель на сгенерированный интерфейс.</div><div class="ttdef"><b>Definition:</b> editnotedialog.hpp:80</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_a1dce8d429f817b345fb9a0e7665aeb31"><div class="ttname"><a href="classEditNoteDialog.html#a1dce8d429f817b345fb9a0e7665aeb31">EditNoteDialog::notNewNote</a></div><div class="ttdeci">bool notNewNote</div><div class="ttdef"><b>Definition:</b> editnotedialog.hpp:87</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_af96cbe6d3b52db3dc5e7c4c22a31e358"><div class="ttname"><a href="classEditNoteDialog.html#af96cbe6d3b52db3dc5e7c4c22a31e358">EditNoteDialog::mNote</a></div><div class="ttdeci">Note * mNote</div><div class="ttdoc">Указатель на редактируемую заметку</div><div class="ttdef"><b>Definition:</b> editnotedialog.hpp:82</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html"><div class="ttname"><a href="classEditNoteDialog.html">EditNoteDialog</a></div><div class="ttdoc">Класс диалога (диалогового окна) редактирования заметки.</div><div class="ttdef"><b>Definition:</b> editnotedialog.hpp:45</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_a8674d8616c0f5b47baa78b244eb44322"><div class="ttname"><a href="classEditNoteDialog.html#a8674d8616c0f5b47baa78b244eb44322">EditNoteDialog::accept</a></div><div class="ttdeci">void accept() Q_DECL_OVERRIDE</div><div class="ttdoc">Обрабатывает подтверждение диалога.</div><div class="ttdef"><b>Definition:</b> editnotedialog.cpp:76</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_ab8110a8c4d13cdd5961ca16624750d1d"><div class="ttname"><a href="classEditNoteDialog.html#ab8110a8c4d13cdd5961ca16624750d1d">EditNoteDialog::setNote</a></div><div class="ttdeci">void setNote(Note *note)</div><div class="ttdoc">Устанавливает указатель note на редактируемую заметку.</div><div class="ttdef"><b>Definition:</b> editnotedialog.cpp:52</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_aae78f19fa974f2996bcc47cc76d52bf3"><div class="ttname"><a href="classEditNoteDialog.html#aae78f19fa974f2996bcc47cc76d52bf3">EditNoteDialog::EditNoteDialog</a></div><div class="ttdeci">EditNoteDialog(QWidget *parent=0)</div><div class="ttdoc">Конструктор с необязательным указанием родительского объекта.</div><div class="ttdef"><b>Definition:</b> editnotedialog.cpp:26</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_a23d38b3907579e28177ad37d3527b590"><div class="ttname"><a href="classEditNoteDialog.html#a23d38b3907579e28177ad37d3527b590">EditNoteDialog::~EditNoteDialog</a></div><div class="ttdeci">~EditNoteDialog()</div><div class="ttdoc">Деструктор</div><div class="ttdef"><b>Definition:</b> editnotedialog.cpp:41</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_a35c8b7f7ca891163b99d2408704c89d7"><div class="ttname"><a href="classEditNoteDialog.html#a35c8b7f7ca891163b99d2408704c89d7">EditNoteDialog::setNoteForEdit</a></div><div class="ttdeci">void setNoteForEdit(Note *note)</div><div class="ttdef"><b>Definition:</b> editnotedialog.cpp:57</div></div>
+<div class="ttc" id="aclassNote_html"><div class="ttname"><a href="classNote.html">Note</a></div><div class="ttdoc">Класс заметки.</div><div class="ttdef"><b>Definition:</b> note.hpp:22</div></div>
+<div class="ttc" id="aclassEditNoteDialog_html_a336757989a11c8d2e9d0f8bce5dda90c"><div class="ttname"><a href="classEditNoteDialog.html#a336757989a11c8d2e9d0f8bce5dda90c">EditNoteDialog::note</a></div><div class="ttdeci">Note * note() const</div><div class="ttdoc">Возвращает указатель на редактируемую заметку.</div><div class="ttdef"><b>Definition:</b> editnotedialog.cpp:47</div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.18
+</small></address>
+</body>
+</html>

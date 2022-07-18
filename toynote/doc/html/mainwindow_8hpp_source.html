@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.18"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Toynote: Исходный файл mainwindow.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Toynote
+   </div>
+   <div id="projectbrief">A toy note application</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.18 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">mainwindow.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="mainwindow_8hpp.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef MAINWINDOW_HPP</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define MAINWINDOW_HPP</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span> <span class="comment">// unique_ptr</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="notebook_8hpp.html">notebook.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// Объявляем класс Ui::MainWindow, чтобы ниже можно было упоминать указатели на него,</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// не включая определение класса. Этот класс создаётся автоматически из UI-файла.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// Данное объявление также было создано автоматически, когда Qt Creator</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// добавлял в проект UI-файл и класс для него.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span>Ui</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span><a class="code" href="classMainWindow.html">MainWindow</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classMainWindow.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMainWindow.html">MainWindow</a> : <span class="keyword">public</span> QMainWindow</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classMainWindow.html#a8b244be8b7b7db1b08de2a2acb9409db">MainWindow</a>(QWidget *parent = 0);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classMainWindow.html#ae98d00a93bc118200eeef9f9bba1dba7">~MainWindow</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     * В этом разделе перечисляются закрытые члены класса, которые обеспечивают</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     * его работу и недоступны извне.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classMainWindow.html#acbb248028be589bac28c3f07614f6c6e">   55</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="classMainWindow.html#acbb248028be589bac28c3f07614f6c6e">saveMode</a> {BINARY=0x00, TEXT=0x01};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a3fcbf1a847c1e52ce0bb1369582effa4">saveNotebookToFile</a>(<span class="keyword">const</span> QString &amp;fileName, <span class="keyword">const</span> <a class="code" href="classMainWindow.html#acbb248028be589bac28c3f07614f6c6e">saveMode</a> &amp;mode);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#aef889e76145a694625cdf634299ad061">isNotebookOpen</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classMainWindow.html#a41c53b499ced596828632d7c71c4ffc5">   68</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#a41c53b499ced596828632d7c71c4ffc5">isNotebookSaved</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a794d15d7324aac830b44738a5747e7d3">setNotebookFileName</a>(<span class="keyword">const</span> QString &amp;name = QString());</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    QString <a class="code" href="classMainWindow.html#a9dd23590d7f50cc5a8ec0600609586d4">notebookName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#ac5622f2ac7418d880604adee3b408cde">createNotebook</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a391dc7ecc17dfb96f5b2afa8673261f2">setNotebook</a>(<a class="code" href="classNotebook.html">Notebook</a> *nb);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#af78829e2f770a8b4b99a40bf7b630925">destroyNotebook</a>();</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classMainWindow.html#ae726dc0c4cb46920180b2031664c5c93">   89</a></span>&#160;    Ui::MainWindow *<a class="code" href="classMainWindow.html#ae726dc0c4cb46920180b2031664c5c93">mUi</a>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classMainWindow.html#a5c681720e7337dbb640b9e68098f3446">   96</a></span>&#160;    std::unique_ptr&lt;Notebook&gt; <a class="code" href="classMainWindow.html#a5c681720e7337dbb640b9e68098f3446">mNotebook</a>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classMainWindow.html#a4d5dfee992005d61bf5b83be342b1e5e">   98</a></span>&#160;    QString <a class="code" href="classMainWindow.html#a4d5dfee992005d61bf5b83be342b1e5e">mNotebookFileName</a>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">     * В этом разделе перечисляются слоты — методы, которые могут получать и</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">     * обрабатывать сигналы, например от активации пункта меню</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a0e80770317d86685ca596ab5c7bf4b77">aboutqt</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#afe2f1f694b830c5a60dfd87f1f029151">displayAbout</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a045802a8e005cee79a9320ded6743ea3">toCourses</a>();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a439b604739397e8a803f611681f6b8fc">startLottery</a>();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#af2ac44c1d9bdffc1bce7e5f14ddf1feb">newNotebook</a>();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#a0fb96a1452c0621d717e84740164bc18">saveNotebook</a>();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#ad90e8bf55f5eeeb9333531160548d360">saveNotebookAs</a>(<span class="keyword">const</span> <a class="code" href="classMainWindow.html#acbb248028be589bac28c3f07614f6c6e">saveMode</a> &amp;mode=BINARY);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#a8f826b17e197228fa55a4856e3c0a216">saveNotebookAsText</a>();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#a2903155d9c73d72c485237e1cb31894b">openNotebook</a>();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#af74ddc0be0f4335708042a727c34589c">closeNotebook</a>();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMainWindow.html#a0a3fe050e90e7e6902ffa7fcc857df05">newNote</a>();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#ab981c550cd4bec81290db05d6ffb227e">editNote</a>(QModelIndex idx);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#aff30cb658a2c19a60f84d7c341ba6470">deleteNotes</a>();</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#aaa99f6eaa438dea4536f94b35377e3e6">refreshWindowTitle</a>();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#ac8905dee34dff6c552a4ba22b47fa4f0">disableNoteList</a>(<span class="keywordtype">bool</span> cond);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a56a1922361b1d1400c127715087d7244">disableUIActions</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;disable);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#afce3ae8e5ade3fea3baafb4ab154ae99">reconnectWithNewModel</a>();</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a627d7b538a0d60645e6c339bd787eeee">exit</a>();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="comment">// В этом разделе перечисляются сигналы, которые выдаёт данный класс</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;signals:</div>
+<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classMainWindow.html#a4e147f347eb4a7de3b55a059e428f793">  158</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a4e147f347eb4a7de3b55a059e428f793">notebookFileNameChanged</a>(QString name);</div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classMainWindow.html#ab13290eb445281ec41ff6db2eef3bdb7">  160</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#ab13290eb445281ec41ff6db2eef3bdb7">notebookReady</a>();</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classMainWindow.html#aebb270f9a4973967506f3d31716d541b">  162</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#aebb270f9a4973967506f3d31716d541b">notebookCreated</a>();</div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classMainWindow.html#a2fd331408106b6d393c5b2de2a79582b">  167</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a2fd331408106b6d393c5b2de2a79582b">notebookOpened</a>(QString fileName);</div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classMainWindow.html#a5b24f474cc48ffc5d8738ddf4cc2944e">  169</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a5b24f474cc48ffc5d8738ddf4cc2944e">notebookSaved</a>();</div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="classMainWindow.html#a3755af9c7b0354245a3ac8a6dc892afe">  171</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMainWindow.html#a3755af9c7b0354245a3ac8a6dc892afe">notebookClosed</a>();</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;};</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">#endif // MAINWINDOW_HPP</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassMainWindow_html_a439b604739397e8a803f611681f6b8fc"><div class="ttname"><a href="classMainWindow.html#a439b604739397e8a803f611681f6b8fc">MainWindow::startLottery</a></div><div class="ttdeci">void startLottery()</div><div class="ttdoc">Запускает лотерею.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:214</div></div>
+<div class="ttc" id="aclassMainWindow_html_ab13290eb445281ec41ff6db2eef3bdb7"><div class="ttname"><a href="classMainWindow.html#ab13290eb445281ec41ff6db2eef3bdb7">MainWindow::notebookReady</a></div><div class="ttdeci">void notebookReady()</div><div class="ttdoc">Сигнализирует, что записная книжка готова к работе с пользователем (после создания или открытия).</div></div>
+<div class="ttc" id="aclassMainWindow_html_a794d15d7324aac830b44738a5747e7d3"><div class="ttname"><a href="classMainWindow.html#a794d15d7324aac830b44738a5747e7d3">MainWindow::setNotebookFileName</a></div><div class="ttdeci">void setNotebookFileName(const QString &amp;name=QString())</div><div class="ttdoc">Устанавливает имя файла текущей записной книжки равным name.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:616</div></div>
+<div class="ttc" id="aclassMainWindow_html_aef889e76145a694625cdf634299ad061"><div class="ttname"><a href="classMainWindow.html#aef889e76145a694625cdf634299ad061">MainWindow::isNotebookOpen</a></div><div class="ttdeci">bool isNotebookOpen() const</div><div class="ttdoc">Возвращает true, если в настоящий момент имеется открытая записная книжка.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:609</div></div>
+<div class="ttc" id="aclassMainWindow_html_a2fd331408106b6d393c5b2de2a79582b"><div class="ttname"><a href="classMainWindow.html#a2fd331408106b6d393c5b2de2a79582b">MainWindow::notebookOpened</a></div><div class="ttdeci">void notebookOpened(QString fileName)</div><div class="ttdoc">Сигнализирует, что записная книжка успешно открыта.</div></div>
+<div class="ttc" id="anotebook_8hpp_html"><div class="ttname"><a href="notebook_8hpp.html">notebook.hpp</a></div><div class="ttdoc">Заголовочный файл класса Notebook.</div></div>
+<div class="ttc" id="aclassMainWindow_html_a9dd23590d7f50cc5a8ec0600609586d4"><div class="ttname"><a href="classMainWindow.html#a9dd23590d7f50cc5a8ec0600609586d4">MainWindow::notebookName</a></div><div class="ttdeci">QString notebookName() const</div><div class="ttdoc">Возвращает имя файла текущей записной книжки.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:624</div></div>
+<div class="ttc" id="aclassMainWindow_html_a627d7b538a0d60645e6c339bd787eeee"><div class="ttname"><a href="classMainWindow.html#a627d7b538a0d60645e6c339bd787eeee">MainWindow::exit</a></div><div class="ttdeci">void exit()</div><div class="ttdoc">Завершает работу программы.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:238</div></div>
+<div class="ttc" id="aclassMainWindow_html_a045802a8e005cee79a9320ded6743ea3"><div class="ttname"><a href="classMainWindow.html#a045802a8e005cee79a9320ded6743ea3">MainWindow::toCourses</a></div><div class="ttdeci">void toCourses()</div><div class="ttdoc">Переходит на самые лучшие e-курсы в мире.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:207</div></div>
+<div class="ttc" id="aclassMainWindow_html_ae98d00a93bc118200eeef9f9bba1dba7"><div class="ttname"><a href="classMainWindow.html#ae98d00a93bc118200eeef9f9bba1dba7">MainWindow::~MainWindow</a></div><div class="ttdeci">~MainWindow()</div><div class="ttdoc">Деструктор MainWindow.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:100</div></div>
+<div class="ttc" id="aclassMainWindow_html_ac5622f2ac7418d880604adee3b408cde"><div class="ttname"><a href="classMainWindow.html#ac5622f2ac7418d880604adee3b408cde">MainWindow::createNotebook</a></div><div class="ttdeci">void createNotebook()</div><div class="ttdoc">Создаёт новую записную книжку.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:640</div></div>
+<div class="ttc" id="aclassMainWindow_html_acbb248028be589bac28c3f07614f6c6e"><div class="ttname"><a href="classMainWindow.html#acbb248028be589bac28c3f07614f6c6e">MainWindow::saveMode</a></div><div class="ttdeci">saveMode</div><div class="ttdoc">Режим сохранения записной книжки</div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:55</div></div>
+<div class="ttc" id="aclassMainWindow_html_af74ddc0be0f4335708042a727c34589c"><div class="ttname"><a href="classMainWindow.html#af74ddc0be0f4335708042a727c34589c">MainWindow::closeNotebook</a></div><div class="ttdeci">bool closeNotebook()</div><div class="ttdoc">Закрывает текущую записную книжку. Возвращает true в случае успеха.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:371</div></div>
+<div class="ttc" id="aclassMainWindow_html_a3fcbf1a847c1e52ce0bb1369582effa4"><div class="ttname"><a href="classMainWindow.html#a3fcbf1a847c1e52ce0bb1369582effa4">MainWindow::saveNotebookToFile</a></div><div class="ttdeci">void saveNotebookToFile(const QString &amp;fileName, const saveMode &amp;mode)</div><div class="ttdoc">Сохраняет текущую записную книжку в файл.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:546</div></div>
+<div class="ttc" id="aclassMainWindow_html_a0a3fe050e90e7e6902ffa7fcc857df05"><div class="ttname"><a href="classMainWindow.html#a0a3fe050e90e7e6902ffa7fcc857df05">MainWindow::newNote</a></div><div class="ttdeci">bool newNote()</div><div class="ttdoc">Создаёт новую заметку в текущей записной книжке. Возвращает true в случае успеха.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:426</div></div>
+<div class="ttc" id="aclassMainWindow_html_a4d5dfee992005d61bf5b83be342b1e5e"><div class="ttname"><a href="classMainWindow.html#a4d5dfee992005d61bf5b83be342b1e5e">MainWindow::mNotebookFileName</a></div><div class="ttdeci">QString mNotebookFileName</div><div class="ttdoc">Имя файла текущей записной книжки.</div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:98</div></div>
+<div class="ttc" id="aclassMainWindow_html_a391dc7ecc17dfb96f5b2afa8673261f2"><div class="ttname"><a href="classMainWindow.html#a391dc7ecc17dfb96f5b2afa8673261f2">MainWindow::setNotebook</a></div><div class="ttdeci">void setNotebook(Notebook *nb)</div><div class="ttdoc">Устанавливает указатель на текущую записную книжку равным notebook.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:645</div></div>
+<div class="ttc" id="aclassMainWindow_html"><div class="ttname"><a href="classMainWindow.html">MainWindow</a></div><div class="ttdoc">Класс главного окна программы.</div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:40</div></div>
+<div class="ttc" id="aclassMainWindow_html_a5c681720e7337dbb640b9e68098f3446"><div class="ttname"><a href="classMainWindow.html#a5c681720e7337dbb640b9e68098f3446">MainWindow::mNotebook</a></div><div class="ttdeci">std::unique_ptr&lt; Notebook &gt; mNotebook</div><div class="ttdoc">Указатель на текущую записную книжку.</div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:96</div></div>
+<div class="ttc" id="aclassMainWindow_html_a41c53b499ced596828632d7c71c4ffc5"><div class="ttname"><a href="classMainWindow.html#a41c53b499ced596828632d7c71c4ffc5">MainWindow::isNotebookSaved</a></div><div class="ttdeci">bool isNotebookSaved</div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:68</div></div>
+<div class="ttc" id="aclassMainWindow_html_a0fb96a1452c0621d717e84740164bc18"><div class="ttname"><a href="classMainWindow.html#a0fb96a1452c0621d717e84740164bc18">MainWindow::saveNotebook</a></div><div class="ttdeci">bool saveNotebook()</div><div class="ttdoc">Сохраняет текущую записную книжку. Возвращает true в случае успеха.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:265</div></div>
+<div class="ttc" id="aclassMainWindow_html_af2ac44c1d9bdffc1bce7e5f14ddf1feb"><div class="ttname"><a href="classMainWindow.html#af2ac44c1d9bdffc1bce7e5f14ddf1feb">MainWindow::newNotebook</a></div><div class="ttdeci">void newNotebook()</div><div class="ttdoc">Создаёт новую записную книжку.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:247</div></div>
+<div class="ttc" id="aclassMainWindow_html_a2903155d9c73d72c485237e1cb31894b"><div class="ttname"><a href="classMainWindow.html#a2903155d9c73d72c485237e1cb31894b">MainWindow::openNotebook</a></div><div class="ttdeci">bool openNotebook()</div><div class="ttdoc">Открывает записную книжку вместо текущей. Возвращает true в случае успеха.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:314</div></div>
+<div class="ttc" id="aclassMainWindow_html_aebb270f9a4973967506f3d31716d541b"><div class="ttname"><a href="classMainWindow.html#aebb270f9a4973967506f3d31716d541b">MainWindow::notebookCreated</a></div><div class="ttdeci">void notebookCreated()</div><div class="ttdoc">Сигнализирует, что записная книжка успешно создана.</div></div>
+<div class="ttc" id="aclassMainWindow_html_a8f826b17e197228fa55a4856e3c0a216"><div class="ttname"><a href="classMainWindow.html#a8f826b17e197228fa55a4856e3c0a216">MainWindow::saveNotebookAsText</a></div><div class="ttdeci">bool saveNotebookAsText()</div><div class="ttdoc">Сохраняет текущую записную книжку в указанном пользователем текстовом файле. Возвращает true в случае...</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:309</div></div>
+<div class="ttc" id="aclassNotebook_html"><div class="ttname"><a href="classNotebook.html">Notebook</a></div><div class="ttdoc">Класс записной книжки.</div><div class="ttdef"><b>Definition:</b> notebook.hpp:39</div></div>
+<div class="ttc" id="aclassMainWindow_html_aaa99f6eaa438dea4536f94b35377e3e6"><div class="ttname"><a href="classMainWindow.html#aaa99f6eaa438dea4536f94b35377e3e6">MainWindow::refreshWindowTitle</a></div><div class="ttdeci">void refreshWindowTitle()</div><div class="ttdoc">Обновляет заголовок окна.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:522</div></div>
+<div class="ttc" id="aclassMainWindow_html_afe2f1f694b830c5a60dfd87f1f029151"><div class="ttname"><a href="classMainWindow.html#afe2f1f694b830c5a60dfd87f1f029151">MainWindow::displayAbout</a></div><div class="ttdeci">void displayAbout()</div><div class="ttdoc">Отображает окно с информацией о программе.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:163</div></div>
+<div class="ttc" id="aclassMainWindow_html_a8b244be8b7b7db1b08de2a2acb9409db"><div class="ttname"><a href="classMainWindow.html#a8b244be8b7b7db1b08de2a2acb9409db">MainWindow::MainWindow</a></div><div class="ttdeci">MainWindow(QWidget *parent=0)</div><div class="ttdoc">Конструктор с необязательным указанием родительского объекта parent.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:39</div></div>
+<div class="ttc" id="aclassMainWindow_html_afce3ae8e5ade3fea3baafb4ab154ae99"><div class="ttname"><a href="classMainWindow.html#afce3ae8e5ade3fea3baafb4ab154ae99">MainWindow::reconnectWithNewModel</a></div><div class="ttdeci">void reconnectWithNewModel()</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:127</div></div>
+<div class="ttc" id="aclassMainWindow_html_ae726dc0c4cb46920180b2031664c5c93"><div class="ttname"><a href="classMainWindow.html#ae726dc0c4cb46920180b2031664c5c93">MainWindow::mUi</a></div><div class="ttdeci">Ui::MainWindow * mUi</div><div class="ttdoc">Указатель на сгенерированный интерфейс.</div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:89</div></div>
+<div class="ttc" id="aclassMainWindow_html_ab981c550cd4bec81290db05d6ffb227e"><div class="ttname"><a href="classMainWindow.html#ab981c550cd4bec81290db05d6ffb227e">MainWindow::editNote</a></div><div class="ttdeci">void editNote(QModelIndex idx)</div><div class="ttdoc">Позволяет редактировать имеющуюся заметку, ассоциирующуюся с индексом idx.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:445</div></div>
+<div class="ttc" id="aclassMainWindow_html_a3755af9c7b0354245a3ac8a6dc892afe"><div class="ttname"><a href="classMainWindow.html#a3755af9c7b0354245a3ac8a6dc892afe">MainWindow::notebookClosed</a></div><div class="ttdeci">void notebookClosed()</div><div class="ttdoc">Сигнализирует, что записная книжка успешно закрыта.</div></div>
+<div class="ttc" id="aclassMainWindow_html_ac8905dee34dff6c552a4ba22b47fa4f0"><div class="ttname"><a href="classMainWindow.html#ac8905dee34dff6c552a4ba22b47fa4f0">MainWindow::disableNoteList</a></div><div class="ttdeci">void disableNoteList(bool cond)</div><div class="ttdoc">Отключает вид списка заметок.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:147</div></div>
+<div class="ttc" id="aclassMainWindow_html_af78829e2f770a8b4b99a40bf7b630925"><div class="ttname"><a href="classMainWindow.html#af78829e2f770a8b4b99a40bf7b630925">MainWindow::destroyNotebook</a></div><div class="ttdeci">void destroyNotebook()</div><div class="ttdoc">Уничтожает объект текущей записной книжки.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:661</div></div>
+<div class="ttc" id="aclassMainWindow_html_a4e147f347eb4a7de3b55a059e428f793"><div class="ttname"><a href="classMainWindow.html#a4e147f347eb4a7de3b55a059e428f793">MainWindow::notebookFileNameChanged</a></div><div class="ttdeci">void notebookFileNameChanged(QString name)</div><div class="ttdoc">Сигнал об изменении имени открытого файла.</div></div>
+<div class="ttc" id="aclassMainWindow_html_a0e80770317d86685ca596ab5c7bf4b77"><div class="ttname"><a href="classMainWindow.html#a0e80770317d86685ca596ab5c7bf4b77">MainWindow::aboutqt</a></div><div class="ttdeci">void aboutqt()</div><div class="ttdoc">Отображает окно с информацией о qt.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:156</div></div>
+<div class="ttc" id="aclassMainWindow_html_aff30cb658a2c19a60f84d7c341ba6470"><div class="ttname"><a href="classMainWindow.html#aff30cb658a2c19a60f84d7c341ba6470">MainWindow::deleteNotes</a></div><div class="ttdeci">void deleteNotes()</div><div class="ttdoc">Удаляет выбранные заметки из текущей записной книжки.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:472</div></div>
+<div class="ttc" id="aclassMainWindow_html_ad90e8bf55f5eeeb9333531160548d360"><div class="ttname"><a href="classMainWindow.html#ad90e8bf55f5eeeb9333531160548d360">MainWindow::saveNotebookAs</a></div><div class="ttdeci">bool saveNotebookAs(const saveMode &amp;mode=BINARY)</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:285</div></div>
+<div class="ttc" id="aclassMainWindow_html_a56a1922361b1d1400c127715087d7244"><div class="ttname"><a href="classMainWindow.html#a56a1922361b1d1400c127715087d7244">MainWindow::disableUIActions</a></div><div class="ttdeci">void disableUIActions(const bool &amp;disable)</div><div class="ttdoc">Отключает некоторые элементы графического интерфейса: создание заметок, сохранения и т....</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:106</div></div>
+<div class="ttc" id="aclassMainWindow_html_a5b24f474cc48ffc5d8738ddf4cc2944e"><div class="ttname"><a href="classMainWindow.html#a5b24f474cc48ffc5d8738ddf4cc2944e">MainWindow::notebookSaved</a></div><div class="ttdeci">void notebookSaved()</div><div class="ttdoc">Сигнализирует, что записная книжка успешно сохранена.</div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.18
+</small></address>
+</body>
+</html>

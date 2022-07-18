@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.18"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Toynote: Исходный файл note.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Toynote
+   </div>
+   <div id="projectbrief">A toy note application</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.18 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">note.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="note_8hpp.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef NOTE_HPP</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define NOTE_HPP</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QDataStream&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QTextStream&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classNote.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classNote.html">Note</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classNote.html#a11dfaf68eb7a094b121add4adb18620e">Note</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classNote.html#a11dfaf68eb7a094b121add4adb18620e">Note</a>(QString <a class="code" href="classNote.html#a8a2b4daf165e42db8831cc4f89cd51d3">title</a>, QString <a class="code" href="classNote.html#ae9952347382a9634cff53088c84db5c2">text</a>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">const</span> QString &amp;<a class="code" href="classNote.html#a8a2b4daf165e42db8831cc4f89cd51d3">title</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNote.html#a65150ecf35f28f67a601f687ea3971c8">setTitle</a>(<span class="keyword">const</span> QString &amp;<a class="code" href="classNote.html#a8a2b4daf165e42db8831cc4f89cd51d3">title</a>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> QString &amp;<a class="code" href="classNote.html#ae9952347382a9634cff53088c84db5c2">text</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNote.html#a77e21cc960ed20946c8ec4b2ddc6e7d9">setText</a>(<span class="keyword">const</span> QString &amp;<a class="code" href="classNote.html#ae9952347382a9634cff53088c84db5c2">text</a>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNote.html#a94ec63fc756f370ac529b61d35e4d3dd">save</a>(QDataStream &amp;ost) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classNote.html#a334e8c79849cd00773556cab92611b12">load</a>(QDataStream &amp;ist);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classNote.html#ac6d797b9b3ae54d89af49e2bf8042823">   49</a></span>&#160;    QString <a class="code" href="classNote.html#ac6d797b9b3ae54d89af49e2bf8042823">mTitle</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classNote.html#afe66a1e47f981a52fd284a52676d5a87">   51</a></span>&#160;    QString <a class="code" href="classNote.html#afe66a1e47f981a52fd284a52676d5a87">mText</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="note_8hpp.html#a913522204736846a5a0a3b61d53cb961">   64</a></span>&#160;<span class="keyword">inline</span> QDataStream &amp;<a class="code" href="note_8hpp.html#a913522204736846a5a0a3b61d53cb961">operator&lt;&lt;</a>(QDataStream &amp;ost, <span class="keyword">const</span> <a class="code" href="classNote.html">Note</a> &amp;note)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    note.<a class="code" href="classNote.html#a94ec63fc756f370ac529b61d35e4d3dd">save</a>(ost);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> ost;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="note_8hpp.html#ae51b292d5be9838b1ace888bf0cc72a5">   76</a></span>&#160;<span class="keyword">inline</span> QDataStream &amp;<a class="code" href="note_8hpp.html#ae51b292d5be9838b1ace888bf0cc72a5">operator&gt;&gt;</a>(QDataStream &amp;ist, <a class="code" href="classNote.html">Note</a> &amp;note)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    note.<a class="code" href="classNote.html#a334e8c79849cd00773556cab92611b12">load</a>(ist);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> ist;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif // NOTE_HPP</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassNote_html_ae9952347382a9634cff53088c84db5c2"><div class="ttname"><a href="classNote.html#ae9952347382a9634cff53088c84db5c2">Note::text</a></div><div class="ttdeci">const QString &amp; text() const</div><div class="ttdoc">Возвращает текст заметки.</div><div class="ttdef"><b>Definition:</b> note.cpp:31</div></div>
+<div class="ttc" id="aclassNote_html_a334e8c79849cd00773556cab92611b12"><div class="ttname"><a href="classNote.html#a334e8c79849cd00773556cab92611b12">Note::load</a></div><div class="ttdeci">void load(QDataStream &amp;ist)</div><div class="ttdoc">Загружает заметку из потока ist.</div><div class="ttdef"><b>Definition:</b> note.cpp:46</div></div>
+<div class="ttc" id="aclassNote_html_ac6d797b9b3ae54d89af49e2bf8042823"><div class="ttname"><a href="classNote.html#ac6d797b9b3ae54d89af49e2bf8042823">Note::mTitle</a></div><div class="ttdeci">QString mTitle</div><div class="ttdoc">Заголовок заметки.</div><div class="ttdef"><b>Definition:</b> note.hpp:49</div></div>
+<div class="ttc" id="aclassNote_html_a94ec63fc756f370ac529b61d35e4d3dd"><div class="ttname"><a href="classNote.html#a94ec63fc756f370ac529b61d35e4d3dd">Note::save</a></div><div class="ttdeci">void save(QDataStream &amp;ost) const</div><div class="ttdoc">Сохраняет заметку в поток ost.</div><div class="ttdef"><b>Definition:</b> note.cpp:41</div></div>
+<div class="ttc" id="anote_8hpp_html_a913522204736846a5a0a3b61d53cb961"><div class="ttname"><a href="note_8hpp.html#a913522204736846a5a0a3b61d53cb961">operator&lt;&lt;</a></div><div class="ttdeci">QDataStream &amp; operator&lt;&lt;(QDataStream &amp;ost, const Note &amp;note)</div><div class="ttdoc">Реализация оператора &lt;&lt; для вывода Note в QDataStream.</div><div class="ttdef"><b>Definition:</b> note.hpp:64</div></div>
+<div class="ttc" id="aclassNote_html"><div class="ttname"><a href="classNote.html">Note</a></div><div class="ttdoc">Класс заметки.</div><div class="ttdef"><b>Definition:</b> note.hpp:22</div></div>
+<div class="ttc" id="anote_8hpp_html_ae51b292d5be9838b1ace888bf0cc72a5"><div class="ttname"><a href="note_8hpp.html#ae51b292d5be9838b1ace888bf0cc72a5">operator&gt;&gt;</a></div><div class="ttdeci">QDataStream &amp; operator&gt;&gt;(QDataStream &amp;ist, Note &amp;note)</div><div class="ttdoc">Реализация оператора &gt;&gt; для ввода Note из QDataStream.</div><div class="ttdef"><b>Definition:</b> note.hpp:76</div></div>
+<div class="ttc" id="aclassNote_html_a11dfaf68eb7a094b121add4adb18620e"><div class="ttname"><a href="classNote.html#a11dfaf68eb7a094b121add4adb18620e">Note::Note</a></div><div class="ttdeci">Note()</div><div class="ttdoc">Конструктор по умолчанию</div><div class="ttdef"><b>Definition:</b> note.cpp:13</div></div>
+<div class="ttc" id="aclassNote_html_a65150ecf35f28f67a601f687ea3971c8"><div class="ttname"><a href="classNote.html#a65150ecf35f28f67a601f687ea3971c8">Note::setTitle</a></div><div class="ttdeci">void setTitle(const QString &amp;title)</div><div class="ttdoc">Устанавливает заголовок заметки равным title.</div><div class="ttdef"><b>Definition:</b> note.cpp:26</div></div>
+<div class="ttc" id="aclassNote_html_a77e21cc960ed20946c8ec4b2ddc6e7d9"><div class="ttname"><a href="classNote.html#a77e21cc960ed20946c8ec4b2ddc6e7d9">Note::setText</a></div><div class="ttdeci">void setText(const QString &amp;text)</div><div class="ttdoc">Устанавливает заголовок заметки равным text.</div><div class="ttdef"><b>Definition:</b> note.cpp:36</div></div>
+<div class="ttc" id="aclassNote_html_a8a2b4daf165e42db8831cc4f89cd51d3"><div class="ttname"><a href="classNote.html#a8a2b4daf165e42db8831cc4f89cd51d3">Note::title</a></div><div class="ttdeci">const QString &amp; title() const</div><div class="ttdoc">Возвращает заголовок заметки.</div><div class="ttdef"><b>Definition:</b> note.cpp:21</div></div>
+<div class="ttc" id="aclassNote_html_afe66a1e47f981a52fd284a52676d5a87"><div class="ttname"><a href="classNote.html#afe66a1e47f981a52fd284a52676d5a87">Note::mText</a></div><div class="ttdeci">QString mText</div><div class="ttdoc">Текст заметки.</div><div class="ttdef"><b>Definition:</b> note.hpp:51</div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.18
+</small></address>
+</body>
+</html>

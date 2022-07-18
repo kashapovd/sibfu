@@ -1,0 +1,13 @@
+<map id="mainwindow.hpp" name="mainwindow.hpp">
+<area shape="rect" id="node1" title="Заголовочный файл класса MainWindow." alt="" coords="99,5,231,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,83,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="107,80,223,107"/>
+<area shape="rect" id="node4" href="$notebook_8hpp.html" title="Заголовочный файл класса Notebook." alt="" coords="247,80,358,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="10,155,81,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="105,155,265,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="267,229,378,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="341,155,414,181"/>
+<area shape="rect" id="node9" href="$note_8hpp.html" title="Заголовочный файл класса Note." alt="" coords="438,155,517,181"/>
+<area shape="rect" id="node10" title=" " alt="" coords="413,229,520,256"/>
+<area shape="rect" id="node11" title=" " alt="" coords="545,229,615,256"/>
+</map>

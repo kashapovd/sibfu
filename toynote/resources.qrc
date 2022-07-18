@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/Note-add.svg</file>
+        <file>icons/Note-remove.svg</file>
+        <file>icons/Notebook-new.svg</file>
+        <file>icons/Notebook-open.svg</file>
+        <file>icons/Notebook-save-as.svg</file>
+        <file>icons/Notebook-save.svg</file>
+        <file>icons/exit.svg</file>
+        <file>icons/web.svg</file>
+        <file>icons/about.svg</file>
+	<file>icons/qt.svg</file>
+        <file>icons/appicon.svg</file>
+        <file>icons/lottery.svg</file>
+        <file>toynote_ru.qm</file>
+    </qresource>
+</RCC>
