@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #imageDrop {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            
+            height: 5rem;
+            border: 0.2rem dashed gray;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <b>{{user.login}}</b> н а странице поиска <br> <a href="/">На главную</a>
+    <hr>
+    <form action="/search" method="get">
+        <input type="text" name="search" placeholder="Поиск..." value="{{search}}">
+        <select name="author">
+            <option value="-1">Все авторы</option>
+            {% for item in authors %}
+            <option value="{{item.id}}" {% if item.id == author %}selected{% endif %}>{{item.login}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Найти">
+    </form>
+    {% if images %}
+    <b>Результаты поиска:</b>
+    <div class="images">
+    {% for image in images %}
+        <a href="image/{{image.id}}">
+            <img src="/images?filename={{image.filename}}" alt="{{image.filename}}">
+        </a>
+    {% else %}
+        <p>Пусто</p>
+    {% endfor %}
+    {% else %}
+        <p>Пусто</p>
+    {% endif %}
+    </div>
+</body>
+</html>

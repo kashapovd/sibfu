@@ -1,0 +1,16 @@
+{
+    "galleries": [
+        {
+            "name": "forza",
+            "path": "galleries/forza"
+        },
+        {
+            "name": "gamingphotography",
+            "path": "galleries/gamingphotography"
+        },
+        {
+            "name": "skyrim",
+            "path": "galleries/skyrim"
+        }
+    ]
+}

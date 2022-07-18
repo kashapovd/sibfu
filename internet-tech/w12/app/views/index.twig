@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Привет, <b>{{user.login}}</b>! <a href="/logout">Выйти</a>
+    <hr>
+    <b>Закладки:</b>
+    {% if menu %}
+    <ul>
+    {% for item in menu %}
+        <li><a href="{{item.url}}">{{item.name}}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>Пока ничего нет</p> 
+    {% endif %}
+    <hr>
+    <b>Действия:</b>
+    <ul>
+        <li><a href="/editMenu">Изменить список закладок</a></li>
+        <li><a href="/lookupTables">Просмотреть данные таблиц</a></li>
+        <li><a href="/gallery">Галерея</a></li>
+        <li><a href="/search">Поиск</a></li>
+        <hr>
+        <li><a href="/import">Импортировать данные</a></li>
+        <li><a href="/export" download>Экспортировать данные</a></li>
+    </ul>
+    <hr>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if table %}
+    <b>{{user.login}}</b>, вы смотрите таблицу <i>{{table}}</i>. <br><a href="/lookupTables">Назад</a>
+    {% else %}
+    <b>{{user.login}}</b>, вы смотрите таблицы. <br><a href="/">На главную</a>
+    {% endif %}
+    <hr>
+    {% if table %}
+    <table border width="100%">
+        <thead>
+            <tr>
+            {% for item in tableData.header %}
+                <th>
+                    <a href="/lookupTables?table={{table}}&sort=ASC&col={{item.column_name}}">[ASC]</a>
+                    {{item.column_name}}
+                    <a href="/lookupTables?table={{table}}&sort=DESC&col={{item.column_name}}">[DESC]</a>
+                </th>
+            {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in tableData.data %}
+            <tr>
+                {% for col in row %}
+                    <td>{{col}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <form action="/lookupTables" method="get">
+        <select name="table">
+            {% for table in tables %}
+            <option value="{{table}}">{{table}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Перейти">
+    </form>
+    {% endif %}
+</body>
+</html>

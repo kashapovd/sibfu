@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <b>{{user.login}}</b>, вы редактируете меню закладок. 
+    <br>
+    <a href="/">На главную</a>
+    <hr>
+    <b>Закладки:</b>
+    <div id="menuHolder">
+        {% if menu %}
+        {% for item in menu %}
+        <div>
+            <input type="text" name="url" value="{{item.url}}">
+            <input type="text" name="name" value="{{item.name}}">
+            <button class="removeItemBtn">X</button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <hr>
+    <div>
+        <input class="inputData" type="text" name="url" placeholder="Ссылка">
+        <input class="inputData" type="text" name="name" placeholder="Название">
+        <button id="addItemBtn">+</button>
+    </div>
+    <button id="saveBtn">Сохранить</button>
+</body>
+<script>
+    let menu = [];
+
+    function updateDeleteBtns() {
+        document.querySelectorAll('.removeItemBtn').forEach(e => e.onclick = function() {
+            let item = this.parentNode;
+            let index = menu.indexOf(item);
+            menu.splice(index, 1);
+            item.remove();
+        });
+    }
+
+    function init() {
+        let addItemBtn = document.getElementById('addItemBtn');
+        let saveBtn = document.getElementById('saveBtn');
+        let menuHolder = document.getElementById('menuHolder');
+
+        let children = menuHolder.children;
+        for (let i = 0; i < children.length; i++) {
+            let child = children[i];
+            let url = child.children[0].value;
+            let name = child.children[1].value;
+            menu.push({url, name});
+        }
+        
+        addItemBtn.addEventListener('click', function() {
+            let url = document.querySelector('input.inputData[name="url"]').value;
+            let name = document.querySelector('input.inputData[name="name"]').value;
+            let item = {
+                url: url,
+                name: name
+            };
+            menu.push(item);
+            let newItem = document.createElement('div');
+            newItem.innerHTML = '<input type="text" name="url" value="' + url + '"><input type="text" name="name" value="' + name + '"><button class="removeItemBtn">X</button>';
+            menuHolder.appendChild(newItem);
+            document.querySelector('input.inputData[name="url"]').value = '';
+            document.querySelector('input.inputData[name="name"]').value = '';
+
+            updateDeleteBtns()
+        });
+
+        saveBtn.addEventListener('click', async function() {
+            let data = {
+                menu: menu
+            };
+            let response = await fetch('/editMenu', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            let result = await response.json();
+            if (result.code == 200) {
+                alert('Меню сохранено');
+                location.reload();
+            } else {
+                alert(`Ошибка ${result.code}: ${result.error}`);
+            }
+            console.log(result);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</html>

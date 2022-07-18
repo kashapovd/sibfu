@@ -1,0 +1,61 @@
+version: "1.5"
+services:
+  app:
+    build:
+      args:
+        user: sample
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: work12
+    container_name: work12-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    environment:
+      POSTGRES_DB: "work12-db"
+      POSTGRES_ROOT_PASSWORD: "passw0rd"
+      POSTGRES_PASSWORD: "passw0rd"
+      POSTGRES_USER: "postgres"
+      POSTGRES_HOST: "localhost"
+      POSTGRES_PORT: "5432"
+    volumes:
+      - ./:/var/www
+    networks:
+      - work12-net
+  db:
+    image: postgres
+    container_name: work12-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "work12-db"
+      POSTGRES_ROOT_PASSWORD: "passw0rd"
+      POSTGRES_PASSWORD: "passw0rd"
+      POSTGRES_USER: "postgres"
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgs:/docker-entrypoint-initdb.d
+    networks:
+      - work12-net
+  nginx:
+    image: nginx:alpine
+    container_name: work12-nginx
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST: "localhost"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "work12-db"
+      POSTGRES_ROOT_PASSWORD: "passw0rd"
+      POSTGRES_PASSWORD: "passw0rd"
+      POSTGRES_USER: "postgres"
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./nginx:/etc/nginx/conf.d/
+    networks:
+      - work12-net
+
+networks:
+  work12-net:
+    driver: bridge

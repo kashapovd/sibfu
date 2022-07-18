@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <b>{{user.login}}</b> осматривает картинку... <br><a href="/">На главную</a>
+    <hr>
+    <img src="/images?type=full&filename={{image.filename}}" alt="{{image.filename}}" style="max-width: 100%">
+    <br>
+    <a href="/images?type=thumb&filename={{image.filename}}">Миниатюра</a>
+    <a href="/image/{{image.id}}/delete">Удалить</a>
+     <form action="/image/{{image.id}}" method="post">
+        описание:
+        <input type="text" name="description" value="{{image.description}}">
+        <br>
+        <input type="submit" value="Сохранить">
+    </form>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+        #imageDrop {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            
+            height: 5rem;
+            border: 0.2rem solid gray;
+        }
+    </style>
+
+</head>
+<body>
+    <b>{{user.login}}</b>, вы смотрите свою галерею. <br> <a href="/">На главную</a>
+    <hr>
+    {% for image in images %}
+        <a href="/image/{{image.id}}">
+            <img src="/images?filename={{image.filename}}" alt="{{image.id}}">
+        </a>
+    {% else %}
+        <p>Нет изображений</p>
+    {% endfor %}
+    <hr>
+    <div id="imageDrop">
+    Перетащите изображение в это поле, чтобы загрузить
+    </div>
+</body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // create a drop zone
+    let dropZone = document.getElementById("imageDrop");
+    // add event listeners
+    dropZone.addEventListener("dragover", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+    }, false);
+    dropZone.addEventListener("dragleave", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+    }, false);
+    dropZone.addEventListener("drop", async function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+        // get the file
+        let file = e.dataTransfer.files[0];
+        // create a form data
+        let formData = new FormData();
+        // append the file
+        formData.append("file", file);
+        try {
+            // upload image with fetch
+            const response = await fetch("/uploadImage", {
+                method: "POST",
+                body: formData
+            });
+            // get the response
+            const data = await response.json();
+            if (data.code == 200) {
+                location.href = "/gallery";
+            } else {
+                alert(data.error);
+            }
+        } catch (e) {
+            alert(e);
+        }
+    }, false);
+});
+</script>
+</html>

@@ -1,0 +1,11 @@
+load_a:
+	in 0x08
+	mov b, a
+	in 0x08
+	mov c, a
+
+sum_loop:
+	dad b
+	dcx b
+	jnc sum_loop
+	hlt

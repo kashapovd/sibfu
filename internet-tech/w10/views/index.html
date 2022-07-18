@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinks DB</title>
+    <style>
+        #coctails {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #coctails > div {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            padding: 0;
+            border: 1px solid #000;
+            background-color: #fff;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <b>Status:</b> <i id="status">waiting</i>
+
+    <hr>
+
+    <h3>Entre first letter of coctail</h3>
+    <input type="text" placeholder="First letter of coctail" maxlength="1">
+    <button onclick="searchCoctails()">Search</button>
+
+    <div id="coctailDetails" hidden>
+        <hr>
+        <h3>Coctail details</h3>
+        <div id="coctail"></div>
+    </div>
+
+    <div>
+        <hr>
+        <h3>Coctails</h3>
+        <div id="coctails">no coctails</div>
+    </div>
+</body>
+
+<script>
+const coctailsDBSearch = "https://www.thecocktaildb.com/api/json/v1/1/search.php";
+const coctailsDBLookup = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php";
+
+// set status function
+function setStatus(status) {
+    document.getElementById("status").textContent = status;
+}
+
+// hide cocktail details
+function hideCoctailDetails() {
+    document.getElementById("coctailDetails").hidden = true;
+}
+
+// set cocktail details
+function setCoctailDetails(coctail) {
+    document.getElementById("coctailDetails").hidden = false;
+    document.getElementById("coctail").innerHTML = coctail;
+    // scroll to coctail details
+    document.getElementById("coctailDetails").scrollIntoView();
+}
+
+// async function which search coctails by first letter
+async function searchCoctails() {
+    const firstLetter = document.querySelector("input").value;
+    // if firstLetter is empty or more than one letter and not a letter
+    if (firstLetter === "" || firstLetter.length > 1 || !/[a-z]/i.test(firstLetter)) {
+        setStatus("wrong input");
+        return;
+    }
+    hideCoctailDetails();
+    const response = await fetch(`${coctailsDBSearch}?f=${firstLetter}`);
+    setStatus("loading");
+    const data = await response.json();
+    setStatus("loaded");
+    // check for coctails data
+    if (data.drinks === null) {
+        setStatus("no coctails");
+        coctailList.innerHTML = "no coctails";
+        return;
+    }
+    // create coctails list
+    createCoctailList(data.drinks);
+    setStatus("ready");
+}
+
+// function which creates list of coctails with details button
+function createCoctailList(coctails) {
+    const coctailList = document.getElementById("coctails");
+    coctailList.innerHTML = "";
+    coctails.forEach(coctail => {
+        const coctailItem = document.createElement("div");
+        coctailItem.innerHTML = `
+            <h4 style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;color: white;">${coctail.strDrink}</h4>
+            <button onclick="showCoctailDetails('${coctail.idDrink}')">Details</button>
+        `;
+        // set background with drink thumb image
+        coctailItem.style.backgroundImage = `url(${coctail.strDrinkThumb})`;
+        // center background and make it cover whole coctail item
+        coctailItem.style.backgroundPosition = "center";
+        coctailItem.style.backgroundSize = "cover";
+
+        coctailList.appendChild(coctailItem);
+    });
+}
+
+// async function which shows coctail details
+async function showCoctailDetails(id) {
+    const response = await fetch(`${coctailsDBLookup}?i=${id}`);
+    const data = await response.json();
+    const coctail = data.drinks[0];
+    let coctailDetails = `
+        <h3>${coctail.strDrink}</h3>
+        <h4>Alcoholic: ${coctail.strAlcoholic}</h4>
+        <h4>Category: ${coctail.strCategory}</h4>
+        <h4>Glass: ${coctail.strGlass}</h4>
+        <h4>Instructions</h4>
+        <p>${coctail.strInstructions}</p>
+        <h4>Ingredients</h4>
+    `;
+    for (let i = 1; i < 16; i++) {
+        if (coctail[`strIngredient${i}`] !== null) {
+            coctailDetails += `
+                <p>${coctail[`strIngredient${i}`]} - ${coctail[`strMeasure${i}`] || "any"}</p>
+            `;
+        }
+    }
+    setCoctailDetails(coctailDetails);
+}
+
+</script>
+</html>

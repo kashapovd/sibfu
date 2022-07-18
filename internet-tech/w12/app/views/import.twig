@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if message %}
+    <div id="message" style="padding: 1rem; border: 2px solid black; background-color: blue; color: white">{{message}}</div>
+    {% endif %}
+    {% if error %}
+    <div id="error" style="padding: 1rem; border: 2px solid black; background-color: red; color: white">{{error}}</div>
+    {% endif %}
+    <h4>Страница импорта</h4>
+    <a href="/">На главную</a>
+    <form action="/import" method="post">
+        <textarea name="xml" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" name="submit" value="подтвердить">
+    </form>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let dropZone = document.body;
+    dropZone.addEventListener("dragover", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+    }, false);
+    dropZone.addEventListener("dragleave", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+    }, false);
+    dropZone.addEventListener("drop", async function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+        // get the file
+        let file = e.dataTransfer.files[0];
+        let fr=new FileReader();
+        fr.onload=function(){
+            document.querySelector('[name=xml]').textContent = fr.result;
+        }
+        fr.readAsText(file);
+    }, false);
+});
+</script>
+</html>

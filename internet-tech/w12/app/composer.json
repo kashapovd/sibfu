@@ -1,0 +1,21 @@
+{
+    "name": "nuark/w12",
+    "description": "Work 12 app",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Nuark\\W12\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andrew",
+            "email": "me@nuark.xyz"
+        }
+    ],
+    "require": {
+        "pecee/simple-router": "4.3.7.2",
+        "twig/twig": "^3.3"
+    }
+}

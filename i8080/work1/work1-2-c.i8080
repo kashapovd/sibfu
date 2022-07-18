@@ -1,0 +1,42 @@
+mvi e, 0x80
+load_a:
+	in 0x08
+	mov c,a
+
+load_b:
+	in 0x08
+
+mult_loop:
+	rrc
+	jc write_carry
+label1:
+	mov d,a
+	mov a,b
+	rlc
+	mov b,a
+	mov a,c
+	rlc
+	jnc label4 
+
+label2:
+	inr b
+	mvi c,1
+	sub c
+label4:
+	mov c,a
+	mov a,d
+	jmp mult_loop
+
+write_carry:
+	sub e
+	jz mult_loop_end
+	dad b
+	jmp label1
+mult_loop_end:
+	dad b
+	mov A,L
+	out 0x02
+
+
+
+

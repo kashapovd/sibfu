@@ -1,0 +1,14 @@
+{
+    "johndoe": {
+        "id": 1,
+        "login": "johndoe",
+        "password": "johndoe",
+        "fullName": "John Doe"
+    },
+    "janedoe": {
+        "id": 2,
+        "login": "janedoe",
+        "password": "janedoe",
+        "fullName": "Jane Doe"
+    }
+}

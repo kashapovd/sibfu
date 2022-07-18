@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        .actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{title}}</h1>
+
+    <hr>
+    <div class="actions">
+        <a href="/">На главную</a>
+        <a href="/logout">Выйти</a>
+        <a href="/notes">Мои заметки</a>
+        <a href="/create">Создать заметку</a>
+    </div>
+    <hr>
+    
+    <form action="/create" method="post">
+        <input type="text" name="title" placeholder="Заголовок" required>
+        <textarea name="text" placeholder="Текст" required></textarea>
+        <input type="submit" value="Создать">
+    </form>
+</body>
+</html>

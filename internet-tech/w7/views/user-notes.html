@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        .noteList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .note {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            background-color: blanchedalmond;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .actions a {
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{title}}</h1>
+
+    <hr>
+    <div class="actions">
+        <a href="/">На главную</a>
+        <a href="/logout">Выйти</a>
+        <a href="/create">Создать заметку</a>
+    </div>
+    <hr>
+    
+    <div class="noteList">
+        {{#notes}}
+            <div class="note">
+                <h4>Заметка '{{title}}'</h4>
+                <button onclick="javascript:location.pathname='/note/{{id}}'">Открыть</button>
+                <button onclick="javascript:location.pathname='/note/{{id}}/delete'">Удалить</button>
+            </div>
+        {{/notes}}
+    </div>
+    {{^notes}}
+        <p>No notes yet.</p>
+    {{/notes}}
+</body>
+</html>

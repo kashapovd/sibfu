@@ -1,0 +1,17 @@
+load_a:
+	in 0x08
+	mov c,a
+
+load_b:
+	in 0x08
+
+mul_loop:
+	dad b
+	dcr a
+	jnz mul_loop
+mul_loop_end:
+	xchg
+	hlt
+
+
+

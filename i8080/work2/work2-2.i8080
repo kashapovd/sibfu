@@ -1,0 +1,31 @@
+.adr:0x0030
+.set:1
+.set:4
+.set:3
+.set:50
+.set:2
+
+.adr:0x0000
+sort_loop:
+	lxi h, 0x0030
+	mvi e, 0
+	mvi c, 5
+sort_inner_loop:
+	dcr c
+	jz sort_loop_end
+	mov a, m
+	inx h
+	mov b, m
+	cmp b
+	jc sort_inner_loop
+	mov m ,a 
+	dcx h
+	mov m, b
+	inx h
+	mvi e, 1
+	jmp sort_inner_loop
+sort_loop_end:
+	mvi a, 1
+	cmp e
+	jz sort_loop
+	hlt

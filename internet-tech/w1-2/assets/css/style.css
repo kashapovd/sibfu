@@ -1,0 +1,147 @@
+body {
+    background: rgb(45, 45, 45);
+}
+
+a:link {
+    color: #00be00;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #006500;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blueviolet;
+}
+
+.lang_statement {
+    color:aqua;
+}
+
+.var {
+    color: darkorange;
+}
+
+.bracket {
+    color: wheat;
+}
+
+.function {
+    color: deeppink;
+}
+
+.function::after {
+    color: white;
+    content: "()";
+}
+
+img {
+    max-width: 40%;
+}
+
+table.certifications {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 30%;
+}
+
+.member::after{
+    content: ";";
+}
+
+.banner {
+    transform: perspective( 500px ) rotateY( -45deg );
+}
+
+#banner-1 {
+    margin-left: 100px;
+    z-index: 1;
+}
+
+#banner-2 {
+    margin-left: -130px;
+    z-index: 2;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li.member {
+    margin: 24px auto;
+}
+ 
+.cert_button {
+    font-family: 'Cairo', sans-serif;
+    margin: 0 auto;
+    display: block;
+    width: calc(15% + 10px);
+}
+
+.about { 
+    position: relative;
+    font-family: monospace;
+    line-height: 24px;
+    font-size: 24px;
+    color: white;
+    width: max-content;
+    margin: auto;
+    padding: 10px;
+    max-width: 600px;
+}
+
+@media all and (max-width: 1000px) {
+    .about {
+        min-width: fit-content;
+    }
+    li.member {
+        min-width: min-content;
+    }
+}
+
+.skills { 
+    position: relative;
+    font-family: monospace;
+    line-height: 24px;
+    font-size: 24px;
+    color: white;
+    width: max-content;
+    margin: auto;
+    padding: 10px;
+}
+
+.certification {
+    position: relative;
+}
+
+.hello {
+    position: relative;
+    font-family: monospace;
+    line-height: 40px;
+    font-size: 40px;
+    color: white;
+    min-width: 360px;
+    text-align: center;
+}
+
+.hello::after {
+    content: "";
+    position: relative;
+    top: 0;
+    right: 20px;
+    display: inline-block;
+    background-color: #009821;
+    vertical-align: top;
+    width: 25px;
+    height: 40px;
+    animation:
+        blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}

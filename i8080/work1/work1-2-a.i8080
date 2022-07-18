@@ -1,0 +1,26 @@
+load_a:
+	in 0x08
+	mov b,a
+
+load_b:
+	in 0x08
+	mov c,a
+
+enter_loop:
+	mvi a, 0
+mul_loop:
+	add b
+	jnc dec_c
+write_carry:
+	inr d
+dec_c: 
+	dcr c
+	jnz mul_loop
+	jmp mul_loop_end
+
+mul_loop_end:
+	mov e,a
+	hlt
+
+
+

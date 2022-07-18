@@ -1,0 +1,60 @@
+.adr:0x1000
+.set:1
+.set:4
+.set:3
+.set:50
+.set:2
+
+.adr:0x0000
+find_max:
+	mvi c, 5
+	mvi h, 5
+	lxi d, 0x1000
+	ldax d
+	mov b, a
+find_max_loop:
+	dcr c
+	jz find_max_loop_end
+	inx d
+	ldax d
+	cmp b
+	jnc chg_max
+	jmp find_max_loop
+chg_max:
+	mov b, a
+	mov h, c
+	jmp find_max_loop
+find_max_loop_end:
+	mov a, b 
+	out 0x02
+	mvi a, 5
+	sub h
+	out 0x02
+	nop
+
+find_min:
+	mvi c, 5
+	mvi h, 5
+	lxi d, 0x1000
+	ldax d
+	mov b, a
+find_min_loop:
+	dcr c
+	jz find_min_loop_end
+	inx d
+	ldax d
+	cmp b
+	jc chg_min
+	jmp find_min_loop
+chg_min:
+	mov b, a
+	mov h, c
+	jmp find_max_loop
+find_min_loop_end:
+	mov a, b 
+	out 0x02
+	mvi a, 5
+	sub h
+	out 0x02
+	nop
+	

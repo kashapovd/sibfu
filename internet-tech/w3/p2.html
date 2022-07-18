@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        #mainpart {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+        }
+
+        #actions {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        #actions > * {
+            flex-grow: 1;
+        }
+
+        .menu-type-two {
+            font-style: italic;
+        }
+
+        .menu-type-two-styled {
+            background-color: greenyellow !important;
+        }
+        
+        .highlighted {
+            background-color: yellow !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="actions">
+        <button id="btn-copy-menu">Скопировать меню в конец абзаца</button>
+        <button id="btn-change-css">Поменять цвета .menu-type-two</button>
+        <input id="search-bar" type="text" placeholder="Текст для поиска">
+    </div>
+    <br><br><br><br><br>
+    <div id="mainpart">
+        <div style="flex: 10%">
+            <h3>Меню:</h3>
+            <ul id="menu">
+                <li class="menu-type-one">Пользователи</li>
+                <li class="menu-type-two">Статус аккаунта</li>
+                <li class="menu-type-two">Личный кабинет</li>
+                <li class="menu-type-one">Обзорная панель</li>
+                <li class="menu-type-two">Календарь событий</li>
+                <li class="menu-type-one">Личные файлы</li>
+            </ul>
+        </div>
+        <p id="paragraph" style="flex: 90%">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Repellat illo qui unde labore magnam earum aspernatur, 
+            impedit temporibus ex eius architecto corrupti. Facere 
+            aliquid iure temporibus velit quod, sit minima suscipit 
+            nihil, debitis labore quas animi. Laudantium repellat 
+            reiciendis recusandae? Saepe reprehenderit repudiandae 
+            neque quasi recusandae nihil, dolorum voluptate labore? 
+            Quis, iusto pariatur! Quas necessitatibus voluptatibus 
+            perferendis dicta ipsam eius cumque sapiente atque 
+            laudantium, autem delectus culpa, labore itaque quod 
+            omnis tenetur ratione beatae. Quo sunt quidem incidunt 
+            accusamus aliquam inventore maxime et qui similique minus 
+            laudantium sapiente, minima quas modi vel error quasi 
+            consequatur odit magnam non cum? Et nesciunt quaerat 
+            maxime delectus sit doloremque. A deserunt aliquam ullam 
+            tempora rem libero. Quidem voluptatum commodi ab aut earum 
+            exercitationem praesentium recusandae architecto! Ipsum 
+            officia, repellendus mollitia ea eum nemo soluta debitis quo 
+            ad esse incidunt dolores labore dignissimos laudantium 
+            similique laborum tenetur corrupti, quaerat qui ut iste 
+            delectus. Hic dolorum dolor dolore nemo excepturi error iuto, 
+            autem impedit quam modi quae corrupti necessitatibus iste, 
+            earum, quas aliquid distinctio consectetur aut. Eum vitae 
+            voluptatum repellat facilis dicta. Omnis veniam repellat 
+            earum, libero eveniet fugit, doloribus nihil perferendis 
+            maiores necessitatibus vitae repellendus odit impedit dolores 
+            fugiat similique accusantium explicabo voluptatem obcaecati 
+            nam tenetur temporibus unde quibusdam. Non facere, tempore 
+            soluta sunt molestias recusandae quasi a necessitatibus, 
+            illum dolore temporibus! Voluptatum aspernatur ipsum iste 
+            impedit! Nemo, alias esse architecto aliquid iusto beatae 
+            dolores dolore deserunt consequatur facere omnis consectetur 
+            eaque voluptatibus nam nihil quo ratione commodi laborum! 
+            Voluptas quasi, quas alias ratione harum excepturi quis, 
+            voluptates ipsa repellendus perspiciatis vel aliquid maiores 
+            id saepe repellat sunt omnis eos? Atque quod dolore debitis 
+            facilis laudantium enim illum ex, ut quasi quo id tempore 
+            eveniet omnis nemo obcaecati officia quis, provident 
+            voluptate, dolores molestias hic corrupti laborum magni 
+            voluptates! Deserunt sequi tempora nemo corrupti commodi 
+            quibusdam temporibus nam dicta. Odit suscipit minus ipsum 
+            recusandae dolorum alias est ratione in deserunt reiciendis ex 
+            =esse id accusantium rem ullam amet excepturi facilis, 
+            laboriosam eius! Accusamus, repellendus illum excepturi 
+            voluptates impedit hic aliquam similique laborum suscipit amet, 
+            expedita ad, unde vel reiciendis alias perferendis! Dolor 
+            deserunt at minus ab voluptatem provident? Labore ex, neque 
+            necessitatibus optio vitae maiores nam cum expedita nihil 
+            exercitationem cupiditate id officiis rerum voluptatum velit. 
+            Nihil soluta provident similique illo totam, numquam 
+            reprehenderit fugiat aut labore perferendis ipsa neque corrupti 
+            laudantium quos explicabo sit placeat omnis ducimus ipsam est cum. 
+            Ut beatae reprehenderit nobis culpa voluptatum, aliquid mollitia 
+            delectus voluptatem eum. Omnis odio ducimus dolorem quisquam illo 
+            est ab atque expedita, quibusdam quo consequuntur fugiat 
+            exercitationem commodi quae. Voluptas voluptatem fugit velit 
+            tempore quia similique tenetur perferendis earum repellat dolor 
+            esse placeat nam dolore, itaque voluptates facilis iste ea modi 
+            beatae dignissimos et cumque dicta sapiente? Fugit saepe dolores 
+            deleniti! Alias accusamus, corrupti magnam facilis libero blanditiis, 
+            ut dignissimos illum eaque officia saepe sit totam fugiat architecto 
+            aperiam exercitationem labore ipsum vero temporibus animi nihil. 
+            Molestias in nostrum ratione tempora eaque eius quasi voluptate 
+            ducimus labore, odio rem. Deleniti accusantium tempora officiis 
+            perferendis.
+        </p>
+    </div>
+
+    <script src="./p2.js"></script>
+</body>
+</html>
