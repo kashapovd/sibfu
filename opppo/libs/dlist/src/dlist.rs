@@ -1,54 +1,59 @@
-use std::{rc::{Rc, Weak}, cell::RefCell};
+use std::boxed::Box;
 
 struct Dlist<T> {
-    head: Option<Rc<RefCell<Node<T>>>>,
-    tail: Option<Rc<RefCell<Node<T>>>>,
+    head: Option<Box<Node<T>>>,
 }
 
 impl<T> Dlist<T> {
     pub fn new() -> Self {
         Dlist {
-            head: None, 
-            tail: None 
+            head: None
         }
     }
-    pub fn push_back(&mut self, value: T) {
-
-        let mut node = Node::new(value);
-        match &self.tail {
-            None => {
-                let node = Rc::new(RefCell::new(node));
-                self.head = Some(Rc::clone(&node));
-                self.tail = Some(Rc::clone(&node));
-            }
-            Some(oldTail) => {
-                node.prev = Some(Rc::downgrade(oldTail));
-                let newTail = Rc::new(RefCell::new(node));
-                oldTail.borrow_mut().next = Some(Rc::clone(&newTail));
-                self.tail = Some(newTail);
-            }
-        }
-
-    } 
-    pub fn push_front(value: isize) {
-        let mut node = Node::new(value);
-        todo!()
+    pub fn push(&mut self, value: T) {
+        let old_head = self.head.take();
+        let new_head = Box::new(Node::new(value, old_head));
+        self.head = Some(new_head);
     }
-
+    pub fn pop(&mut self) -> Option<T> {
+        self.head.take().map(|n| {
+            self.head = n.next;
+            n.value
+        })
+    }
+    pub fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(|n| {
+            &n.value
+        })
+    }
 }
 
 struct Node<T> {
     value: T,
-    next: Option<Rc<RefCell<Node<T>>>>,
-    prev: Option<Weak<RefCell<Node<T>>>>
+    next: Option<Box<Node<T>>>,
 }
 
 impl<T> Node<T> {
-    pub fn new(value: T) -> Self {
-        Node {
-            value, // using shortland struct initializtion
-            prev: None,
-            next: None
+    pub fn new(value: T, next: Option<Box<Node<T>>>) -> Self {
+        Node { 
+            value, 
+            next 
         }
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    fn basics() {
+        let mut list:Dlist<i32> = Dlist::new();
+        list.push(5);
+        let r = list.peek();
+        assert_eq!(r, Some(&5));
+        let mut r = list.pop();
+        assert_eq!(r, Some(5));
+        r = list.pop();
+        assert_eq!(r, None);
     }
 }
