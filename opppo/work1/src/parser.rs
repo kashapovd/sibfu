@@ -2,7 +2,7 @@ use crate::entities::InheritanceType;
 use crate::token::{Token, TokenType};
 
 #[derive(Debug)]
-pub enum Command {
+pub enum Cmd {
     ADDP(bool, i32),
     ADDO(InheritanceType, i32),
     DEL_P,
@@ -30,23 +30,23 @@ impl Parser {
             pos: 0
         }
     }
-    fn parse_print(&mut self) -> Result<Command, String> {
+    fn parse_print(&mut self) -> Result<Cmd, String> {
         self.input.remove(0);
         if self.input.len() != 0 {
-            Err(format!("Command PRINT doesn't have parameters. Unknown keyword at {}", self.input.get(0).unwrap().startPos))
+            Err(format!("Command PRINT doesn't have parameters. Unknown parameter at {}", self.input.get(0).unwrap().startPos))
         } else {
-            Ok(Command::PRINT)
+            Ok(Cmd::PRINT)
         }
     }
-    fn parse_flush(&mut self) -> Result<Command, String> {
+    fn parse_flush(&mut self) -> Result<Cmd, String> {
         self.input.remove(0);
         if !self.input.is_empty() {
-            Err(format!("Command FLUSH doesn't have parameters. Unknown keyword at {}", self.input.get(0).unwrap().startPos))
+            Err(format!("Command FLUSH doesn't have parameters. Unknown parameter at {}", self.input.get(0).unwrap().startPos))
         } else {
-            Ok(Command::FLUSH)
+            Ok(Cmd::FLUSH)
         }
     }
-    fn parse_sort(&mut self) -> Result<Command, String> {
+    fn parse_sort(&mut self) -> Result<Cmd, String> {
         self.input.remove(0);
         if self.input.is_empty() {
             Err(format!("Please, specify field for sorting"))
@@ -54,7 +54,7 @@ impl Parser {
             let token_field = self.input.get(0).unwrap();
             match token_field.ttype {
                 TokenType::DEVYEAR_INNER_KEYWORD => {
-                    Ok(Command::SORT_DEVYEAR)
+                    Ok(Cmd::SORT_DEVYEAR)
                 }
                 _ => {
                     Err(format!("Sort by unknown field at {}", token_field.startPos))
@@ -62,7 +62,7 @@ impl Parser {
             }
         }
     }
-    pub fn parse(&mut self) -> Result<Command, String> {
+    pub fn parse(&mut self) -> Result<Cmd, String> {
         if !self.input.is_empty() {
             let token = self.input.get(0);
             match token.unwrap().ttype {
