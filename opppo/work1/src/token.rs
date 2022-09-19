@@ -27,8 +27,8 @@ pub enum TokenType {
 #[derive(PartialEq)]
 #[derive(Debug)]
 pub struct Token {
-    ttype: TokenType,
-    startPos: usize
+    pub ttype: TokenType,
+    pub startPos: usize
 }
 
 impl Token {

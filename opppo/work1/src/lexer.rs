@@ -15,40 +15,40 @@ impl Lexer {
     }
     pub fn tokenizator(&mut self) -> Vec<Token> {
         let mut tokens: Vec<Token> = Vec::new();
-        while self.content.len() > self.pos {
-            match self.current_char() {
-                '=' | '.' => {
-                    tokens.push(Token::new(Token::typeByStr(self.current_char().to_string()), self.pos));
-                    self.pos += 1;
-                }
-                _ if self.current_char().is_alphabetic() => {
-                    let mut buff: String = String::new();
-                    let keyword_pos = self.pos;
-                    while self.current_char().is_alphabetic() {
-                        buff.push(self.current_char());
-                        self.pos += 1;
+        while self.pos < self.content.len() {
+            let c = self.content.get(self.pos);
+            if c.is_some() {
+                let mut c = c.unwrap();
+                match c {
+                    '=' | '.' => {
+                        tokens.push(Token::new(Token::typeByStr(c.to_string()), self.pos));
                     }
-                    tokens.push(Token::new(Token::typeByStr(buff), keyword_pos));
-                }
-                _ if self.current_char().is_numeric() => {
-                    let mut buff: String = String::new();
-                    let keyword_pos = self.pos;
-                    while self.current_char().is_numeric() {
-                        buff.push(self.current_char());
-                        self.pos += 1;
-                    };
-                    tokens.push(Token::new(Token::typeByStr(buff), keyword_pos));
-                }
-                _ => {
-                    self.pos += 1;
+                    _ if c.is_alphanumeric() => {
+                        let (word_or_num, keyword_pos) = self.read_word_or_num();
+                        tokens.push(Token::new(Token::typeByStr(word_or_num), keyword_pos));
+                    }
+                    _ => {}
                 }
             }
+            self.pos += 1;
         }
         println!("{:?}", tokens);
         tokens
     }
-    fn current_char(&self) -> char {
-        *self.content.get(self.pos).unwrap()
+    fn read_word_or_num(&mut self) -> (String, usize) {
+        let mut buff: String = String::new();
+        let keyword_pos = self.pos;
+        loop {
+            let c = self.content.get(self.pos);
+            if c.is_some() && c.unwrap().is_alphanumeric() {
+                buff.push(*c.unwrap());
+                self.pos += 1;
+            }
+            else {
+                break;
+            }
+        }
+        (buff, keyword_pos)
     }
 }
 
