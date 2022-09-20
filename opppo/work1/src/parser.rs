@@ -1,21 +1,5 @@
-use crate::entities::InheritanceType;
+use crate::cmd::{Command};
 use crate::token::{Token, TokenType};
-
-#[derive(Debug)]
-pub enum Cmd {
-    ADDP(bool, i32),
-    ADDO(InheritanceType, i32),
-    DEL_P,
-    DEL_O,
-    DEL_IF_DEVAYER(i32),
-    DEL_IF_P_DEVYEAR(i32),
-    DEL_IF_O_DEVYEAR(i32),
-    DEL_IF_P_ADT(bool),
-    DEL_IF_O_INHTYPE(InheritanceType),
-    SORT_DEVYEAR,
-    PRINT,
-    FLUSH,
-}
 
 #[derive(Debug)]
 pub struct Parser {
@@ -30,51 +14,55 @@ impl Parser {
             pos: 0
         }
     }
-    fn parse_print(&mut self) -> Result<Cmd, String> {
-        self.input.remove(0);
-        if self.input.len() != 0 {
-            Err(format!("Command PRINT doesn't have parameters. Unknown parameter at {}", self.input.get(0).unwrap().startPos))
-        } else {
-            Ok(Cmd::PRINT)
+    fn parse_print(&mut self) -> Result<Command, String> {
+        let cmd = Command::new(&self.input);
+        match cmd {
+            Ok(cmd) => Ok(cmd),
+            Err(err) => Err(format!("Unable to parse PRINT command. {err}"))
         }
     }
-    fn parse_flush(&mut self) -> Result<Cmd, String> {
-        self.input.remove(0);
-        if !self.input.is_empty() {
-            Err(format!("Command FLUSH doesn't have parameters. Unknown parameter at {}", self.input.get(0).unwrap().startPos))
-        } else {
-            Ok(Cmd::FLUSH)
+    fn parse_flush(&mut self) -> Result<Command, String> {
+        let cmd = Command::new(&self.input);
+        match cmd {
+            Ok(cmd) => Ok(cmd),
+            Err(err) => Err(format!("Unable to parse FLUSH command. {err}"))
         }
     }
-    fn parse_sort(&mut self) -> Result<Cmd, String> {
-        self.input.remove(0);
-        if self.input.is_empty() {
-            Err(format!("Please, specify field for sorting"))
-        } else {
-            let token_field = self.input.get(0).unwrap();
-            match token_field.ttype {
-                TokenType::DEVYEAR_INNER_KEYWORD => {
-                    Ok(Cmd::SORT_DEVYEAR)
-                }
-                _ => {
-                    Err(format!("Sort by unknown field at {}", token_field.startPos))
-                }
-            }
+    fn parse_sort(&mut self) -> Result<Command, String> {
+        let cmd = Command::new(&self.input);
+        match cmd {
+            Ok(cmd) => Ok(cmd),
+            Err(err) => Err(format!("Unable to parse SORT command. {err}"))
+        }
+
+    }
+    fn parse_add(&mut self) -> Result<Command, String> {
+        let cmd = Command::new(&self.input);
+        match cmd {
+            Ok(cmd) => Ok(cmd),
+            Err(err) => Err(format!("Unable to parse ADD command. {err}"))
         }
     }
-    pub fn parse(&mut self) -> Result<Cmd, String> {
+    fn parse_del(&mut self) -> Result<Command, String> {
+        let cmd = Command::new(&self.input);
+        match cmd {
+            Ok(cmd) => Ok(cmd),
+            Err(err) => Err(format!("Unable to parse DEL command. {err}"))
+        }
+    }
+    pub fn parse(&mut self) -> Result<Command, String> {
         if !self.input.is_empty() {
             let token = self.input.get(0);
             match token.unwrap().ttype {
             TokenType::PRINT => {
                 self.parse_print()
             },
-            // TokenType::ADD => {
-            //     parse_add()
-            // },
-            // TokenType::DEL => {
-            //     parseDEL()
-            // }
+            TokenType::ADD => {
+                self.parse_add()
+            },
+            TokenType::DEL => {
+                self.parse_del()
+            }
             TokenType::SORT => {
                 self.parse_sort()
             },

@@ -21,18 +21,17 @@ impl Lexer {
                 let mut c = c.unwrap();
                 match c {
                     '=' | '.' => {
-                        tokens.push(Token::new(Token::typeByStr(c.to_string()), self.pos));
+                        tokens.push(Token::new(&c.to_string(), self.pos));
                     }
                     _ if c.is_alphanumeric() => {
                         let (word_or_num, keyword_pos) = self.read_word_or_num();
-                        tokens.push(Token::new(Token::typeByStr(word_or_num), keyword_pos));
+                        tokens.push(Token::new(&word_or_num, keyword_pos));
                     }
                     _ => {}
                 }
             }
             self.pos += 1;
         }
-        println!("{:?}", tokens);
         tokens
     }
     fn read_word_or_num(&mut self) -> (String, usize) {
@@ -68,7 +67,7 @@ mod test {
         let mut l = Lexer::new("ADD\n".to_string());
         let tokens = l.tokenizator();
         assert_eq!(tokens.len(), 1);
-        assert_eq!(tokens.get(0), Some(Token::new(TokenType::ADD, 0)).as_ref());
-        assert_ne!(tokens.get(0), Some(Token::new(TokenType::DOT, 0)).as_ref());
+        assert_eq!(tokens.get(0), Some(Token::new(&"ADD".to_string(), 0)).as_ref());
+        assert_ne!(tokens.get(0), Some(Token::new(&"DOT".to_string(), 0)).as_ref());
     }
 }

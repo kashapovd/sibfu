@@ -8,9 +8,8 @@ pub enum TokenType {
     DEL,
     ASSIGN,
     DOT,
-    NUM(i32),
-    TRUE,
-    FALSE,
+    NUM,
+    LOGIC,
     IF,
     PRODCEDURE,
     OOP,
@@ -20,7 +19,6 @@ pub enum TokenType {
     INHTYPE_SINGLE,
     INHTYPE_MULTIPLE,
     INHTYPE_INTERFACE,
-    EOF,
     INVALID
 }
 
@@ -28,17 +26,25 @@ pub enum TokenType {
 #[derive(Debug)]
 pub struct Token {
     pub ttype: TokenType,
-    pub startPos: usize
+    pub startPos: usize,
+    pub content: String
 }
 
 impl Token {
-    pub fn new(ttype: TokenType, startPos: usize ) -> Self {
+    pub fn new(token_symbol: &String, start_pos: usize) -> Self {
         Self {
-            ttype,
-            startPos
+            ttype: Self::typeByStr(token_symbol.to_owned()),
+            startPos: start_pos,
+            content: token_symbol.to_owned()
         }
     }
-    pub fn typeByStr(token: String) -> TokenType {
+    pub fn parseContentAsInt(&self) -> Option<i32> {
+        match self.content.parse::<i32>() {
+            Ok(int32) => Some(int32),
+            Err(notInt32) => None
+        }
+    }
+    fn typeByStr(token: String) -> TokenType {
         match token.to_ascii_lowercase().as_str() {
             "=" => TokenType::ASSIGN,
             "." => TokenType::DOT,
@@ -48,8 +54,8 @@ impl Token {
             "del" => TokenType::DEL,
             "print" => TokenType::PRINT,
             "if" => TokenType::IF,
-            "t" => TokenType::TRUE,
-            "f" => TokenType::FALSE,
+            "t" => TokenType::LOGIC,
+            "f" => TokenType::LOGIC,
             "procedure" => TokenType::PRODCEDURE,
             "oop" => TokenType::OOP,
             "devyear" => TokenType::DEVYEAR_INNER_KEYWORD,
@@ -58,7 +64,7 @@ impl Token {
             "single" => TokenType::INHTYPE_SINGLE,
             "multiple" => TokenType::INHTYPE_MULTIPLE,
             "intefrace" => TokenType::INHTYPE_INTERFACE,
-            _ if token.parse::<i32>().is_ok() => {TokenType::NUM(token.parse::<i32>().unwrap())},
+            _ if token.parse::<i32>().is_ok() => TokenType::NUM,
             _ => TokenType::INVALID
         }
     }
@@ -69,32 +75,34 @@ mod test {
     use super::*;
     #[test]
     fn token_creation() {
-        let t = Token::new(TokenType::ADD, 2);
+        let t = Token::new(&"ADD".to_string(), 0);
         assert_eq!(t.ttype, TokenType::ADD);
         assert_eq!(t.startPos, 2);
     }
     #[test]
     fn type_parsing_dot() {
         let c = '.';
-        let t = Token::new(Token::typeByStr(c.to_string()), 0);
+        let t = Token::new(&c.to_string(), 0);
         assert_eq!(t.ttype, TokenType::DOT);
     }
     #[test]
     fn type_parsing_num() {
         let c = String::from("1998");
-        let t = Token::new(Token::typeByStr(c), 0);
-        assert_eq!(t.ttype, TokenType::NUM(1998));
+        let t = Token::new(&c, 0);
+        assert_eq!(t.ttype, TokenType::NUM);
+        assert_eq!(t.content, "1998".to_string());
+        assert_eq!(Some(1998), t.parseContentAsInt());
     }
     #[test]
     fn type_parsing_float() {
         let c = String::from("0.8");
-        let t = Token::new(Token::typeByStr(c), 0);
+        let t = Token::new(&c, 0);
         assert_eq!(t.ttype, TokenType::INVALID);
     }
     #[test]
     fn type_parsing_invalid() {
         let c = String::from("#$%^&*");
-        let t = Token::new(Token::typeByStr(c), 0);
+        let t = Token::new(&c, 0);
         assert_eq!(t.ttype, TokenType::INVALID);
     }
 }
