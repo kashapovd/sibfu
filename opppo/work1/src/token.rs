@@ -1,71 +1,86 @@
+use crate::entities::InheritanceType;
+
 #[derive(PartialEq)]
 #[derive(Debug)]
 pub enum TokenType {
-    SORT,
-    FLUSH,
-    ADD,
-    PRINT,
-    DEL,
-    ASSIGN,
-    DOT,
-    NUM,
-    LOGIC,
-    IF,
-    PRODCEDURE,
-    OOP,
-    DEVYEAR_INNER_KEYWORD,
-    ADT_INNER_KEYWORD,
-    INHTYPE_INNER_KEYWORD,
-    INHTYPE_SINGLE,
-    INHTYPE_MULTIPLE,
-    INHTYPE_INTERFACE,
-    INVALID
+    Sort,
+    Flush,
+    Add,
+    Print,
+    Del,
+    Assign,
+    Dot,
+    Num,
+    Logic,
+    If,
+    Procedure,
+    Oop,
+    DevyearInnerKeyword,
+    AdtInnerKeyword,
+    InhtypeInnerKeyword,
+    InhType,
+    Invalid
 }
 
 #[derive(PartialEq)]
 #[derive(Debug)]
 pub struct Token {
     pub ttype: TokenType,
-    pub startPos: usize,
+    pub start_pos: usize,
     pub content: String
 }
 
 impl Token {
     pub fn new(token_symbol: &String, start_pos: usize) -> Self {
         Self {
-            ttype: Self::typeByStr(token_symbol.to_owned()),
-            startPos: start_pos,
+            ttype: Self::type_by_str(token_symbol.to_owned()),
+            start_pos,
             content: token_symbol.to_owned()
         }
     }
-    pub fn parseContentAsInt(&self) -> Option<i32> {
+    pub fn parse_content_as_int(&self) -> Option<i32> {
         match self.content.parse::<i32>() {
             Ok(int32) => Some(int32),
-            Err(notInt32) => None
+            Err(_) => None
         }
     }
-    fn typeByStr(token: String) -> TokenType {
+    pub fn parse_content_as_logic(&self) -> Option<bool> {
+        match self.content.to_lowercase().as_str() {
+            "t" => Some(true),
+            "f" => Some(false),
+            _ => None
+        }
+    }
+    pub fn parse_content_inh_type(&self) -> Option<InheritanceType> {
+        match self.content.to_ascii_lowercase().as_str() {
+            "single" => Some(InheritanceType::Single),
+            "multiple" => Some(InheritanceType::Multiple),
+            "interface" => Some(InheritanceType::Interface),
+            _ => None
+        }
+    }
+    fn type_by_str(token: String) -> TokenType {
         match token.to_ascii_lowercase().as_str() {
-            "=" => TokenType::ASSIGN,
-            "." => TokenType::DOT,
-            "add" => TokenType::ADD,
-            "sort" => TokenType::SORT,
-            "flush" => TokenType::FLUSH,
-            "del" => TokenType::DEL,
-            "print" => TokenType::PRINT,
-            "if" => TokenType::IF,
-            "t" => TokenType::LOGIC,
-            "f" => TokenType::LOGIC,
-            "procedure" => TokenType::PRODCEDURE,
-            "oop" => TokenType::OOP,
-            "devyear" => TokenType::DEVYEAR_INNER_KEYWORD,
-            "adt" => TokenType::ADT_INNER_KEYWORD,
-            "inhtype" => TokenType::INHTYPE_INNER_KEYWORD,
-            "single" => TokenType::INHTYPE_SINGLE,
-            "multiple" => TokenType::INHTYPE_MULTIPLE,
-            "intefrace" => TokenType::INHTYPE_INTERFACE,
-            _ if token.parse::<i32>().is_ok() => TokenType::NUM,
-            _ => TokenType::INVALID
+            "=" => TokenType::Assign,
+            "." => TokenType::Dot,
+            "add" => TokenType::Add,
+            "sort" => TokenType::Sort,
+            "flush" => TokenType::Flush,
+            "del" => TokenType::Del,
+            "print" => TokenType::Print,
+            "if" => TokenType::If,
+            "t" => TokenType::Logic,
+            "f" => TokenType::Logic,
+            "procedure" => TokenType::Procedure,
+            "oop" => TokenType::Oop,
+            "devyear" => TokenType::DevyearInnerKeyword,
+            "adt" => TokenType::AdtInnerKeyword,
+            "inhtype" => TokenType::InhtypeInnerKeyword,
+            "single" => TokenType::InhType,
+            "multiple" => TokenType::InhType,
+            "intefrace" => TokenType::InhType,
+            _ if token.parse::<i32>().is_ok() => TokenType::Num,
+            _ => TokenType::Invalid
         }
     }
 }
@@ -76,33 +91,33 @@ mod test {
     #[test]
     fn token_creation() {
         let t = Token::new(&"ADD".to_string(), 0);
-        assert_eq!(t.ttype, TokenType::ADD);
-        assert_eq!(t.startPos, 2);
+        assert_eq!(t.ttype, TokenType::Add);
+        assert_eq!(t.start_pos, 2);
     }
     #[test]
     fn type_parsing_dot() {
         let c = '.';
         let t = Token::new(&c.to_string(), 0);
-        assert_eq!(t.ttype, TokenType::DOT);
+        assert_eq!(t.ttype, TokenType::Dot);
     }
     #[test]
     fn type_parsing_num() {
         let c = String::from("1998");
         let t = Token::new(&c, 0);
-        assert_eq!(t.ttype, TokenType::NUM);
+        assert_eq!(t.ttype, TokenType::Num);
         assert_eq!(t.content, "1998".to_string());
-        assert_eq!(Some(1998), t.parseContentAsInt());
+        assert_eq!(Some(1998), t.parse_content_as_int());
     }
     #[test]
     fn type_parsing_float() {
         let c = String::from("0.8");
         let t = Token::new(&c, 0);
-        assert_eq!(t.ttype, TokenType::INVALID);
+        assert_eq!(t.ttype, TokenType::Invalid);
     }
     #[test]
     fn type_parsing_invalid() {
         let c = String::from("#$%^&*");
         let t = Token::new(&c, 0);
-        assert_eq!(t.ttype, TokenType::INVALID);
+        assert_eq!(t.ttype, TokenType::Invalid);
     }
 }

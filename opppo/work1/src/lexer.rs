@@ -18,7 +18,7 @@ impl Lexer {
         while self.pos < self.content.len() {
             let c = self.content.get(self.pos);
             if c.is_some() {
-                let mut c = c.unwrap();
+                let c = c.unwrap();
                 match c {
                     '=' | '.' => {
                         tokens.push(Token::new(&c.to_string(), self.pos));
@@ -53,7 +53,7 @@ impl Lexer {
 
 #[cfg(test)]
 mod test {
-    use crate::token::{TokenType, Token};
+    use crate::token::Token;
 
     use super::Lexer;
     #[test]

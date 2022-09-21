@@ -3,16 +3,12 @@ use crate::token::{Token, TokenType};
 
 #[derive(Debug)]
 pub struct Parser {
-    input: Vec<Token>,
-    pos: u32
+    input: Vec<Token>
 }
 
 impl Parser {
     pub fn new(input: Vec<Token>) -> Self {
-        Self {
-            input,
-            pos: 0
-        }
+        Self { input }
     }
     fn parse_print(&mut self) -> Result<Command, String> {
         let cmd = Command::new(&self.input);
@@ -54,28 +50,26 @@ impl Parser {
         if !self.input.is_empty() {
             let token = self.input.get(0);
             match token.unwrap().ttype {
-            TokenType::PRINT => {
+            TokenType::Print => {
                 self.parse_print()
             },
-            TokenType::ADD => {
+            TokenType::Add => {
                 self.parse_add()
             },
-            TokenType::DEL => {
+            TokenType::Del => {
                 self.parse_del()
             }
-            TokenType::SORT => {
+            TokenType::Sort => {
                 self.parse_sort()
             },
-            TokenType::FLUSH => {
+            TokenType::Flush => {
                 self.parse_flush()
             },
-            _ => Err(format!("Unknown keyword at {}", token.unwrap().startPos))
+            _ => Err(format!("Unknown keyword at {}", token.unwrap().start_pos))
         }
         } else {
             Err(format!("Source file cannot be empty"))
         }
-        
-        
     }
     
 }
