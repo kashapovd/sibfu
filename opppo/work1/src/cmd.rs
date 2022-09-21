@@ -158,34 +158,34 @@ impl CommandImpl for CDelO {
 
 impl CommandImpl for CDelIfDevyear {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop];
+        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 
 impl CommandImpl for CDelIfODevyear {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop];
+        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Oop, TokenType::Dot, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 impl CommandImpl for CDelIfOInhtype {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop];
+        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Oop, TokenType::Dot, TokenType::InhtypeInnerKeyword, TokenType::Assign, TokenType::InhType];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 
 impl CommandImpl for CDelIfPDevyear {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop];
+        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Procedure, TokenType::Dot, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 
 impl CommandImpl for CDelIfPAdt {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop];
+        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Procedure, TokenType::Dot, TokenType::AdtInnerKeyword, TokenType::Assign, TokenType::Logic];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
