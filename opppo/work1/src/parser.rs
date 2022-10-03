@@ -22,9 +22,8 @@ impl Parser {
                     }
                 } 
                 _ => {
-                    Err(format!("Unexpected error while unpacking a token in parser"))
-                }
-                
+                    Err(format!("Unexpected error while unpacking a token stream in parser"))
+                }     
             }
             
         } else {

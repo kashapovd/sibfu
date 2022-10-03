@@ -124,7 +124,7 @@ impl Command {
                 Err(error_msg)
             }
             _ => {
-                Err(format!("Unknown command {:?}", first_token.ttype))
+                Err(format!("Unknown command \"{}\" declared as {:?}", first_token.content ,first_token.ttype))
             }
             
         }
