@@ -92,7 +92,7 @@ mod test {
     fn token_creation() {
         let t = Token::new(&"ADD".to_string(), 0);
         assert_eq!(t.ttype, TokenType::Add);
-        assert_eq!(t.start_pos, 2);
+        assert_eq!(t.start_pos, 0);
     }
     #[test]
     fn type_parsing_dot() {
@@ -109,7 +109,7 @@ mod test {
         assert_eq!(Some(1998), t.parse_content_as_int());
     }
     #[test]
-    fn type_parsing_float() {
+    fn type_parsing_float_invalid() {
         let c = String::from("0.8");
         let t = Token::new(&c, 0);
         assert_eq!(t.ttype, TokenType::Invalid);
