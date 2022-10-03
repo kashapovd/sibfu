@@ -13,8 +13,7 @@ pub enum CmdType {
     DelIfOInhtype(InheritanceType),
     SortDevyear,
     Print,
-    Flush,
-    Invalid
+    Flush
 }
 
 #[derive(Debug)]
@@ -70,8 +69,62 @@ impl Command {
                 }
                 Err(error_msg)
             }
+            TokenType::Del => {
+                let mut error_msg: String;
+                let mut compare_result = CDelP::compare_implementation(tokens.as_ref());
+                
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelP); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                compare_result = CDelO::compare_implementation(tokens.as_ref());
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelO); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                compare_result = CDelIfDevyear::compare_implementation(tokens.as_ref());
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelIfDevyear(tokens.get(4).unwrap().parse_content_as_int().unwrap())); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                compare_result = CDelIfPDevyear::compare_implementation(tokens.as_ref());
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelIfPDevyear(tokens.get(6).unwrap().parse_content_as_int().unwrap())); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                compare_result = CDelIfODevyear::compare_implementation(tokens.as_ref());
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelIfODevyear(tokens.get(6).unwrap().parse_content_as_int().unwrap())); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                compare_result = CDelIfOInhtype::compare_implementation(tokens.as_ref());
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelIfOInhtype(tokens.get(6).unwrap().parse_content_inh_type().unwrap())); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                compare_result = CDelIfPAdt::compare_implementation(tokens.as_ref());
+                if compare_result.is_ok() {
+                    return Ok(CmdType::DelIfPAdt(tokens.get(6).unwrap().parse_content_as_logic().unwrap())); 
+                } else {
+                    error_msg = compare_result.err().unwrap();
+                }
+
+                Err(error_msg)
+            }
             _ => {
-                todo!()
+                Err(format!("Unknown command {:?}", first_token.ttype))
             }
             
         }
@@ -83,8 +136,8 @@ trait CommandImpl {
     fn command_comparator(tokens: &Vec<Token>, implementation: &Vec<TokenType>) -> Result<bool, String> {
         if tokens.len() == implementation.len() {
             for i in 0..tokens.len() {
-                if tokens.get(0).unwrap().ttype != *implementation.get(0).unwrap() {
-                    return Err(format!("Unknown parameter at {}", tokens.get(0).unwrap().start_pos));
+                if tokens.get(i).unwrap().ttype != *implementation.get(i).unwrap() {
+                    return Err(format!("Unknown parameter at {}", tokens.get(i).unwrap().start_pos));
                 }
             }
         } else {
@@ -92,6 +145,7 @@ trait CommandImpl {
         }
         Ok(true)
     }
+    
 }
 
 struct CAddp {}
@@ -158,34 +212,34 @@ impl CommandImpl for CDelO {
 
 impl CommandImpl for CDelIfDevyear {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
+        let implementation = vec![TokenType::Del, TokenType::If, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 
 impl CommandImpl for CDelIfODevyear {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Oop, TokenType::Dot, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
+        let implementation = vec![TokenType::Del, TokenType::If, TokenType::Oop, TokenType::Dot, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 impl CommandImpl for CDelIfOInhtype {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Oop, TokenType::Dot, TokenType::InhtypeInnerKeyword, TokenType::Assign, TokenType::InhType];
+        let implementation = vec![TokenType::Del, TokenType::If, TokenType::Oop, TokenType::Dot, TokenType::InhtypeInnerKeyword, TokenType::Assign, TokenType::InhType];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 
 impl CommandImpl for CDelIfPDevyear {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Procedure, TokenType::Dot, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
+        let implementation = vec![TokenType::Del, TokenType::If, TokenType::Procedure, TokenType::Dot, TokenType::DevyearInnerKeyword, TokenType::Assign, TokenType::Num];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
 
 impl CommandImpl for CDelIfPAdt {
     fn compare_implementation(tokens: &Vec<Token>) -> Result<bool, String> {
-        let implementation = vec![TokenType::Del, TokenType::Oop, TokenType::If, TokenType::Procedure, TokenType::Dot, TokenType::AdtInnerKeyword, TokenType::Assign, TokenType::Logic];
+        let implementation = vec![TokenType::Del, TokenType::If, TokenType::Procedure, TokenType::Dot, TokenType::AdtInnerKeyword, TokenType::Assign, TokenType::Logic];
         Self::command_comparator(tokens, implementation.as_ref())
     }
 }
