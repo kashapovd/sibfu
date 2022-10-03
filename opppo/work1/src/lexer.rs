@@ -37,13 +37,15 @@ impl Lexer {
     fn read_word_or_num(&mut self) -> (String, usize) {
         let mut buff: String = String::new();
         let keyword_pos = self.pos;
+        buff.push(*self.content.get(self.pos).unwrap());
         loop {
+            self.pos += 1;
             let c = self.content.get(self.pos);
             if c.is_some() && c.unwrap().is_alphanumeric() {
                 buff.push(*c.unwrap());
-                self.pos += 1;
             }
             else {
+                self.pos -= 1;
                 break;
             }
         }
