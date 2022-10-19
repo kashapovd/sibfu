@@ -16,12 +16,15 @@ impl Interpenter {
 
     pub fn execute(&mut self) {
         for cmd_line in self.input.lines() {
-            print!("> {}: ", cmd_line);
+            print!("#> \"{}\" => ", cmd_line);
             let mut lex = Lexer::new(cmd_line.to_owned());
             let tokens = lex.tokenizator();
             let mut p = Parser::new(tokens);
             let c = p.parse();
             println!("{:?}", c);
+
+
+
             match c {
                 Ok(cmd) => {
                     match cmd.ctype {
@@ -33,6 +36,9 @@ impl Interpenter {
                         }
                         CmdType::Print => {
                             println!("{:?}", self.lang_list.peek().unwrap())
+                        }
+                        CmdType::Flush => {
+                            self.lang_list.flush()
                         }
                         _ => {}
                     }

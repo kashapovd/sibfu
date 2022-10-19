@@ -1,8 +1,6 @@
 use std::{fs, env};
-
-use parser::Parser;
-
-use crate::{lexer::Lexer, interpreter::Interpenter};
+use std::fs::metadata;
+use crate::interpreter::Interpenter;
 
 mod lexer;
 mod token;
@@ -11,14 +9,18 @@ mod list;
 mod entities;
 mod parser;
 mod cmd;
+mod utils;
 
-fn main() {
+fn main() -> std::io::Result<()> {
     if env::args().nth(1).is_none() {
-        panic!("Please, specify source file")
+        panic!("Please, specify source file");
     }
-    let f = env::args().nth(1).unwrap();
-    let source = fs::read_to_string(f).unwrap();
+    let file = env::args().nth(1).unwrap();
+    let file_metadata = fs::metadata(&file);
+    assert!(file_metadata.unwrap().is_file());
+    let source = fs::read_to_string(file).unwrap();
 
     let mut i = Interpenter::new(source);
     i.execute();
+    Ok(())
 }

@@ -24,11 +24,9 @@ impl Parser {
                 _ => {
                     Err(format!("Unexpected error while unpacking a token stream in parser"))
                 }     
-            }
-            
+            }  
         } else {
             Err(format!("Source file cannot be empty"))
         }
-    }
-    
+    }    
 }

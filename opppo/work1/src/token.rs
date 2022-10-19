@@ -1,7 +1,10 @@
+use std::borrow::Borrow;
+
 use crate::entities::InheritanceType;
 
 #[derive(PartialEq)]
 #[derive(Debug)]
+#[derive(Copy, Clone)]
 pub enum TokenType {
     Sort,
     Flush,
@@ -59,6 +62,9 @@ impl Token {
             _ => None
         }
     }
+    pub fn get_type(&self) -> TokenType {
+        self.ttype
+    } 
     fn type_by_str(token: String) -> TokenType {
         match token.to_ascii_lowercase().as_str() {
             "=" => TokenType::Assign,

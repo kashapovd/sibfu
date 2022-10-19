@@ -20,14 +20,14 @@ impl Lexer {
             if c.is_some() {
                 let c = c.unwrap();
                 match c {
-                    '=' | '.' => {
-                        tokens.push(Token::new(&c.to_string(), self.pos));
-                    }
+                    ' ' => {}
                     _ if c.is_alphanumeric() => {
                         let (word_or_num, keyword_pos) = self.read_word_or_num();
                         tokens.push(Token::new(&word_or_num, keyword_pos));
                     }
-                    _ => {}
+                    _ => {
+                        tokens.push(Token::new(&c.to_string(), self.pos));
+                    }
                 }
             }
             self.pos += 1;
