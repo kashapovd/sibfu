@@ -10,18 +10,18 @@ pub enum InheritanceType {
 
 #[derive(Debug)]
 pub enum LanguageType {
-    Procedure,
-    Oop
+    Procedure(ProcedureLang),
+    Oop(OopLang)
 }
 
 #[derive(Debug)]
-pub(crate) struct OopLang {
+pub struct OopLang {
     inh_type: InheritanceType,
     dev_year: i32
 }
 
 #[derive(Debug)]
-pub(crate) struct ProcedureLang {
+pub struct ProcedureLang {
     abstract_data_types: bool,
     dev_year: i32
 }
@@ -48,7 +48,7 @@ impl Language for OopLang {
         self.dev_year
     }
     fn get_type(&self) -> LanguageType {
-        LanguageType::Oop
+        LanguageType::Oop(OopLang { inh_type: self.inh_type, dev_year: self.dev_year })
     }
 }
 
@@ -57,12 +57,12 @@ impl Language for ProcedureLang {
         self.dev_year
     }
     fn get_type(&self) -> LanguageType {
-        LanguageType::Procedure
+        LanguageType::Procedure(ProcedureLang { abstract_data_types: self.abstract_data_types, dev_year: self.dev_year })
     }
 }
 
 impl Debug for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        write!(f, "Lang {:?}:{}", self.get_type(), self.get_devyear())
+        write!(f, "{:?}", self.get_type())
     }
 }

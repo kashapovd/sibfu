@@ -18,7 +18,6 @@ pub enum CmdType {
 }
 
 #[derive(Debug)]
-#[derive(Clone)]
 pub struct Command {
     ctype: CmdType
 }
