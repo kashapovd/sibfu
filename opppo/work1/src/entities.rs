@@ -21,6 +21,7 @@ impl std::fmt::Display for InheritanceType {
 }
 
 #[derive(Debug)]
+#[derive(PartialEq)]
 pub enum LanguageType {
     Procedure(ProcedureLang),
     Oop(OopLang)
@@ -38,15 +39,15 @@ impl std::fmt::Display for LanguageType {
 #[derive(Debug)]
 #[derive(PartialEq, PartialOrd)]
 pub struct OopLang {
-    inh_type: InheritanceType,
-    dev_year: i32
+    pub inh_type: InheritanceType,
+    pub dev_year: i32
 }
 
 #[derive(Debug)]
 #[derive(PartialEq, PartialOrd)]
 pub struct ProcedureLang {
-    abstract_data_types: bool,
-    dev_year: i32
+    pub abstract_data_types: bool,
+    pub dev_year: i32
 }
 
 impl ProcedureLang {

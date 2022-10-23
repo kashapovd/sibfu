@@ -1,3 +1,8 @@
-ADD procedure T 1
-ADD oop single 1928
+ADD procedure T 1978
+ADD oop single 1978
 PRINT
+DEL if oop.inhType=single
+PRINT
+ADDasd
+sad
+DEL if oop.inhType=multiple

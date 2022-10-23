@@ -15,7 +15,7 @@ pub struct Slist {
 impl<'a> std::fmt::Display for Slist {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if self.head.is_null() {
-            write!(f, "list is empty")
+            write!(f, "[list is empty]")
         } else {
             for e in self.iter() {
                 write!(f, "{}", e);
@@ -38,17 +38,6 @@ impl<'a> std::fmt::Display for Node {
             writeln!(f, "{}", self.elem)
         }
     }
-}
-
-pub struct IntoIter(Slist);
-
-pub struct Iter<'a> {
-    next: Option<&'a Node>,
-    len: usize
-}
-
-pub struct IterMut<'a> {
-    next: Option<&'a mut Node>,
 }
 
 impl Slist {
@@ -114,12 +103,21 @@ impl Slist {
         while let Some(_) = self.pop() { }
     }
 
-    pub fn delete() {
-        todo!()
-    }
+    pub fn delete(&mut self, index: usize) {
+        let mut elements: Vec<Box<dyn Language>> = Vec::new();
+        for i in 0..index+1 {
+            if i == index {
+                self.pop();
+                break;
+            }
+            elements.push(self.pop().unwrap());
+            
+        }
+        while let Some(e) = elements.pop() {
+            self.push(e);
+        }
 
-    pub fn find() {
-        todo!()
+            
     }
 
     // use sort algo of vec instead of implementing algo for our list
@@ -157,6 +155,17 @@ impl Drop for Slist {
     fn drop(&mut self) {
         self.clean();
     }
+}
+
+pub struct IntoIter(Slist);
+
+pub struct Iter<'a> {
+    next: Option<&'a Node>,
+    len: usize
+}
+
+pub struct IterMut<'a> {
+    next: Option<&'a mut Node>,
 }
 
 impl Iterator for IntoIter {
@@ -213,6 +222,13 @@ mod test {
         assert_eq!(r, Some(Box::new(OopLang::new(InheritanceType::Single, 1928)) as Box<dyn Language>));
         r = list.pop();
         assert_eq!(r, None);
+
+        let a = [1, 2, 3];
+
+        assert_eq!(a.iter().position(|&x| x == 2), Some(1));
+
+        assert_eq!(a.iter().position(|&x| x == 5), None);
+
     }
     #[test]
     fn sorting() {
