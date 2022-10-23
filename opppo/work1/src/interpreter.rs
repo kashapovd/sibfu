@@ -22,7 +22,6 @@ impl Interpenter {
             let mut p = Parser::new(tokens);
             let c = p.parse();
             println!("{:?}", c);
-
             match c {
                 Ok(cmd) => {
                     match cmd.get_type() {
@@ -33,16 +32,23 @@ impl Interpenter {
                             self.lang_list.push(Box::new(ProcedureLang::new(abstract_data_types_support, devyear)) as Box<dyn Language>)
                         }
                         CmdType::Print => {
-                            println!("{:#?}", self.lang_list)
+                            println!("{}", self.lang_list)
                         }
                         CmdType::Flush => {
-                            //drop(&self.lang_list);
+                            self.lang_list.clean();
+                        }
+                        CmdType::SortDevyear => {
+                            self.lang_list.sort();
                         }
                         _ => {}
                     }
                 }
                 Err(_) => {}
             }
+
         }
+    }
+    fn exec_cmd(&mut self, cmd: CmdType) {
+        todo!()
     }
 }

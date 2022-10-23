@@ -1,32 +1,42 @@
+use std::fmt::Debug;
 use std::ptr;
 use std::fmt;
 use crate::entities::Language;
 
-#[derive(Debug)]
-pub struct Slist {
-    head: Link,
-    tail: *mut Node,
-}
-
-impl fmt::Display for Slist {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        // Customize so only `x` and `y` are denoted.
-        write!(f, "head: {:?}, tail: {:?}", self.head, self.tail)
-    }
-}
-
 type Link = *mut Node;
 
 #[derive(Debug)]
+pub struct Slist {
+    head: Link,
+    tail: Link,
+    len: usize
+}
+
+impl<'a> std::fmt::Display for Slist {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        if self.head.is_null() {
+            write!(f, "list is empty")
+        } else {
+            for e in self.iter() {
+                write!(f, "{}", e);
+            }
+            Ok(())
+        }    
+    }
+}
+
+#[derive(Debug)]
+
 struct Node {
     elem: Box<dyn Language>,
     next: Link,
 }
 
-impl fmt::Display for Node {
+impl<'a> std::fmt::Display for Node {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        // Customize so only `x` and `y` are denoted.
-        write!(f, "value: {:?}, next: {:?}", self.elem, self.next)
+        unsafe {
+            writeln!(f, "{}", self.elem)
+        }
     }
 }
 
@@ -34,6 +44,7 @@ pub struct IntoIter(Slist);
 
 pub struct Iter<'a> {
     next: Option<&'a Node>,
+    len: usize
 }
 
 pub struct IterMut<'a> {
@@ -42,7 +53,11 @@ pub struct IterMut<'a> {
 
 impl Slist {
     pub fn new() -> Self {
-        Slist { head: ptr::null_mut(), tail: ptr::null_mut() }
+        Slist {
+            head: ptr::null_mut(),
+            tail: ptr::null_mut(),
+            len: 0
+        }
     }
 
     pub fn push(&mut self, elem: Box<dyn Language>) {
@@ -61,6 +76,7 @@ impl Slist {
             self.tail = new_tail;
             (*self.tail).next = self.head;
         }
+        self.len += 1;
     }
     pub fn pop(&mut self) -> Option<Box<dyn Language>> {
         unsafe {
@@ -76,7 +92,7 @@ impl Slist {
                     self.tail = ptr::null_mut();
                     self.head = ptr::null_mut();
                 }
-
+                self.len -= 1;
                 Some(head.elem)
             }
         }
@@ -98,6 +114,27 @@ impl Slist {
         while let Some(_) = self.pop() { }
     }
 
+    pub fn delete() {
+        todo!()
+    }
+
+    pub fn find() {
+        todo!()
+    }
+
+    // use sort algo of vec instead of implementing algo for our list
+    pub fn sort(&mut self) {
+        let mut elements: Vec<Box<dyn Language>> = Vec::new();
+        while let Some(e) = self.pop() {
+            elements.push(e);
+        }
+        elements.sort_by(|a, b| b.cmp(a));
+        
+        while let Some(e) = elements.pop() {
+            self.push(e);
+        }
+    }
+
     //iter
     pub fn into_iter(self) -> IntoIter {
         IntoIter(self)
@@ -105,7 +142,7 @@ impl Slist {
 
     pub fn iter(&self) -> Iter<'_> {
         unsafe {
-            Iter { next: self.head.as_ref() }
+            Iter { next: self.head.as_ref(), len: self.len}
         }
     }
 
@@ -134,17 +171,21 @@ impl<'a> Iterator for Iter<'a> {
 
     fn next(&mut self) -> Option<Self::Item> {
         unsafe {
-            self.next.map(|node| {
-                self.next = node.next.as_ref();
-                &node.elem
-            })
+            if self.len > 0 {
+                self.next.map(|node| {
+                    self.len -= 1;
+                    self.next = node.next.as_ref();
+                    &node.elem
+                })
+            } else {
+                None
+            }
         }
     }
 }
 
 impl<'a> Iterator for IterMut<'a> {
     type Item = &'a mut Box<dyn Language>;
-
     fn next(&mut self) -> Option<Self::Item> {
         unsafe {
             self.next.take().map(|node| {
@@ -158,7 +199,6 @@ impl<'a> Iterator for IterMut<'a> {
 #[cfg(test)]
 mod test {
     use crate::entities::{OopLang, InheritanceType};
-
     use super::*;
     #[test]
     fn basics() {
@@ -173,5 +213,23 @@ mod test {
         assert_eq!(r, Some(Box::new(OopLang::new(InheritanceType::Single, 1928)) as Box<dyn Language>));
         r = list.pop();
         assert_eq!(r, None);
+    }
+    #[test]
+    fn sorting() {
+        let mut list:Slist = Slist::new();
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 2000)) as Box<dyn Language>);
+        list.sort();
+        
+        let mut e = list.pop();
+        assert_eq!(e, Some(Box::new(OopLang::new(InheritanceType::Single, 1930)) as Box<dyn Language>));
+        e = list.pop();
+        assert_eq!(e, Some(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>));
+        e = list.pop();
+        assert_eq!(e, Some(Box::new(OopLang::new(InheritanceType::Single, 1967)) as Box<dyn Language>));
+        e = list.pop();
+        assert_eq!(e, Some(Box::new(OopLang::new(InheritanceType::Single, 2000)) as Box<dyn Language>));
     }
 }
