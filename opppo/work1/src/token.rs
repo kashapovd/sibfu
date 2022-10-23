@@ -1,5 +1,3 @@
-use std::borrow::Borrow;
-
 use crate::entities::InheritanceType;
 
 #[derive(PartialEq)]

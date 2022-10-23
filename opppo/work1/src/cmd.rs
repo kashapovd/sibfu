@@ -1,4 +1,4 @@
-use crate::{entities::InheritanceType, token::{TokenType, Token, self}, interpreter::Interpenter, utils::vecTokenToVecTokenType};
+use crate::{entities::InheritanceType, token::{TokenType, Token}, utils::vec_token_to_vec_token_type};
 
 #[derive(Debug)]
 #[derive(Copy, Clone)]
@@ -34,8 +34,8 @@ impl Command {
         self.ctype
     }
     fn match_command_type_by_token(tokens: &Vec<Token>) -> Result<CmdType, String> {
-        let tokenTypes = vecTokenToVecTokenType(tokens);
-        match tokenTypes.as_slice() {
+        let token_types = vec_token_to_vec_token_type(tokens);
+        match token_types.as_slice() {
             [TokenType::Print] => { 
                 Ok(CmdType::Print) 
             }

@@ -1,4 +1,4 @@
-use crate::cmd::{Command, CmdType};
+use crate::cmd::CmdType;
 use crate::list::Slist;
 use crate::entities::{Language, OopLang, ProcedureLang};
 use crate::parser::Parser;
