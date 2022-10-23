@@ -1,7 +1,9 @@
 use core::fmt::Debug;
+use std::cmp::{Ordering, Eq};
 
 #[derive(Debug)]
 #[derive(Copy, Clone)]
+#[derive(PartialEq, PartialOrd)]
 pub enum InheritanceType {
     Single,
     Multiple,
@@ -15,12 +17,14 @@ pub enum LanguageType {
 }
 
 #[derive(Debug)]
+#[derive(PartialEq, PartialOrd)]
 pub struct OopLang {
     inh_type: InheritanceType,
     dev_year: i32
 }
 
 #[derive(Debug)]
+#[derive(PartialEq, PartialOrd)]
 pub struct ProcedureLang {
     abstract_data_types: bool,
     dev_year: i32
@@ -38,7 +42,7 @@ impl OopLang {
     }
 }
 
-pub(crate) trait Language {
+pub trait Language {
     fn get_devyear(&self) -> i32;
     fn get_type(&self) -> LanguageType;
 }
@@ -63,6 +67,37 @@ impl Language for ProcedureLang {
 
 impl Debug for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        write!(f, "{:?}", self.get_type())
+        write!(f, "lang: {:?}", self.get_type())
+    }
+}
+
+impl Ord for dyn Language {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.get_devyear().cmp(&other.get_devyear())
+    }
+}
+
+impl Eq for dyn Language {}
+
+impl PartialOrd for dyn Language {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for dyn Language {
+    fn eq(&self, other: &Self) -> bool {
+        self.get_devyear() == other.get_devyear()
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    fn lang_comp() {
+        let e1 = Box::new(OopLang::new(InheritanceType::Multiple, 1938)) as Box<dyn Language>;
+        let e2 = Box::new(OopLang::new(InheritanceType::Single, 1928)) as Box<dyn Language>;
+        assert_eq!(e1 > e2, true);
     }
 }

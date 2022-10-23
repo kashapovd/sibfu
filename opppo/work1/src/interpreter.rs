@@ -6,7 +6,7 @@ use crate::lexer::Lexer;
 
 pub(crate) struct Interpenter {
     input: String,
-    lang_list: Slist<Box<dyn Language>>
+    lang_list: Slist
 }
 
 impl Interpenter {
@@ -33,10 +33,10 @@ impl Interpenter {
                             self.lang_list.push(Box::new(ProcedureLang::new(abstract_data_types_support, devyear)) as Box<dyn Language>)
                         }
                         CmdType::Print => {
-                            println!("{:?}", self.lang_list.peek().unwrap())
+                            println!("{:#?}", self.lang_list)
                         }
                         CmdType::Flush => {
-                            self.lang_list.flush()
+                            //drop(&self.lang_list);
                         }
                         _ => {}
                     }
