@@ -1,6 +1,7 @@
 use std::fmt::Debug;
 use std::ptr;
 use std::fmt;
+use crate::utils;
 use crate::entities::Language;
 
 type Link = *mut Node;
@@ -12,32 +13,11 @@ pub struct Slist {
     len: usize
 }
 
-impl<'a> std::fmt::Display for Slist {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        if self.head.is_null() {
-            write!(f, "[list is empty]")
-        } else {
-            for e in self.iter() {
-                write!(f, "{}", e);
-            }
-            Ok(())
-        }    
-    }
-}
-
 #[derive(Debug)]
 
 struct Node {
     elem: Box<dyn Language>,
     next: Link,
-}
-
-impl<'a> std::fmt::Display for Node {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        unsafe {
-            writeln!(f, "{}", self.elem)
-        }
-    }
 }
 
 impl Slist {
@@ -113,11 +93,9 @@ impl Slist {
             elements.push(self.pop().unwrap());
             
         }
-        while let Some(e) = elements.pop() {
+        while let Some(e) = utils::pop_front_vec(&mut elements) {
             self.push(e);
         }
-
-            
     }
 
     // use sort algo of vec instead of implementing algo for our list
@@ -131,6 +109,10 @@ impl Slist {
         while let Some(e) = elements.pop() {
             self.push(e);
         }
+    }
+
+    pub fn len(&self) -> usize {
+        self.len
     }
 
     //iter
@@ -154,6 +136,25 @@ impl Slist {
 impl Drop for Slist {
     fn drop(&mut self) {
         self.clean();
+    }
+}
+
+impl<'a> std::fmt::Display for Node {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        writeln!(f, "{}", self.elem)
+    }
+}
+
+impl<'a> std::fmt::Display for Slist {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        if self.head.is_null() {
+            write!(f, "[list is empty]")
+        } else {
+            for e in self.iter() {
+                write!(f, "{}", e);
+            }
+            Ok(())
+        }    
     }
 }
 
@@ -223,12 +224,6 @@ mod test {
         r = list.pop();
         assert_eq!(r, None);
 
-        let a = [1, 2, 3];
-
-        assert_eq!(a.iter().position(|&x| x == 2), Some(1));
-
-        assert_eq!(a.iter().position(|&x| x == 5), None);
-
     }
     #[test]
     fn sorting() {
@@ -248,4 +243,64 @@ mod test {
         e = list.pop();
         assert_eq!(e, Some(Box::new(OopLang::new(InheritanceType::Single, 2000)) as Box<dyn Language>));
     }
+    #[test]
+    fn flushing() {
+        let mut list:Slist = Slist::new();
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 2000)) as Box<dyn Language>);
+        
+        list.clean();
+        assert_eq!(list.peek(), None);
+    }
+    #[test]
+    fn deleting() {
+        let mut list:Slist = Slist::new();
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 2000)) as Box<dyn Language>);
+        
+        list.delete(0);
+        let mut e = list.pop();
+        assert!(e.is_some());
+        e = list.pop();
+        assert!(e.is_some());
+        e = list.pop();
+        assert!(e.is_some());
+        e = list.pop();
+        assert!(e.is_none());
+    }
+    #[test]
+    fn iter() {
+        let mut list:Slist = Slist::new();
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>);
+        
+        let mut iter = list.iter();
+        assert_eq!( iter.next(), 
+                    Some(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>).as_ref());
+        assert_eq!( iter.next(), 
+                    Some(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>).as_ref());
+        assert_eq!( iter.next(), 
+                    Some(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>).as_ref());
+        assert_eq!(iter.next(), None);
+    }
+    fn iter_mut() {
+        let mut list:Slist = Slist::new();
+        list.push(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>);
+        list.push(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>);
+        
+        let mut iter = list.iter_mut();
+        assert_eq!( iter.next(), 
+                    Some(Box::new(OopLang::new(InheritanceType::Single, 1931)) as Box<dyn Language>).as_mut());
+        assert_eq!( iter.next(), 
+                    Some(Box::new(OopLang::new(InheritanceType::Multiple, 1967)) as Box<dyn Language>).as_mut());
+        assert_eq!( iter.next(), 
+                    Some(Box::new(OopLang::new(InheritanceType::Interface, 1930)) as Box<dyn Language>).as_mut());
+        assert_eq!(iter.next(), None);
+    } 
 }

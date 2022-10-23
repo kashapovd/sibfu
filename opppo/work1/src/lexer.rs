@@ -21,6 +21,7 @@ impl Lexer {
                 let c = c.unwrap();
                 match c {
                     ' ' => {}
+                    _ if c.is_ascii_control() => {}
                     _ if c.is_alphanumeric() => {
                         let (word_or_num, keyword_pos) = self.read_word_or_num();
                         tokens.push(Token::new(&word_or_num, keyword_pos));
@@ -59,17 +60,25 @@ mod test {
 
     use super::Lexer;
     #[test]
-    fn lexer_creation() {
+    fn creation() {
         let l = Lexer::new("ADD".to_string());
         let s: String = l.content.into_iter().collect();
         assert_eq!(s, "ADD")
     }
     #[test]
-    fn lexer_tokenization() {
+    fn tokenization() {
         let mut l = Lexer::new("ADD".to_string());
         let tokens = l.tokenizator();
         assert_eq!(tokens.len(), 1);
         assert_eq!(tokens.get(0), Some(Token::new(&"ADD".to_string(), 0)).as_ref());
         assert_ne!(tokens.get(0), Some(Token::new(&"DOT".to_string(), 0)).as_ref());
+    }
+    #[test]
+    fn tokenization_with_control_symbols() {
+        let mut l = Lexer::new("\n\t\t\tADD\t\t\t".to_string());
+        let tokens = l.tokenizator();
+        assert_eq!(tokens.len(), 1);
+        assert_eq!(tokens.get(0), Some(Token::new(&"ADD".to_string(), 4)).as_ref());
+        assert_ne!(tokens.get(0), Some(Token::new(&"\nADD".to_string(), 4)).as_ref());
     }
 }

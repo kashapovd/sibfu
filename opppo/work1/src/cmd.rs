@@ -42,7 +42,7 @@ impl Command {
             [TokenType::Flush] => { 
                 Ok(CmdType::Flush) 
             }
-            [TokenType::Sort, TokenType::DevyearInnerKeyword] => { 
+            [TokenType::Sort] => { 
                 Ok(CmdType::SortDevyear) 
             }
             [TokenType::Add, TokenType::Procedure, TokenType::Logic, TokenType::Num] => { 

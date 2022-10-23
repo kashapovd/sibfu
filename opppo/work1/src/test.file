@@ -1,8 +1,7 @@
-ADD procedure T 1978
-ADD oop single 1978
+ADD procedure T 1
+ADD procedure T 2
+ADD procedure T 3
+ADD procedure T 4
+DEL if devyear=1
+DEL if devyear=4
 PRINT
-DEL if oop.inhType=single
-PRINT
-ADDasd
-sad
-DEL if oop.inhType=multiple

@@ -14,7 +14,7 @@ impl Interpenter {
         Self { input, lang_list: Slist::new() }
     }
 
-    pub fn execute(&mut self) {
+    pub fn execute(&mut self) -> Result<String, String> {
         for cmd_line in self.input.lines() {
             print!("##> \"{}\" => ", cmd_line);
             let mut lex = Lexer::new(cmd_line.to_owned());
@@ -38,6 +38,9 @@ impl Interpenter {
                             self.lang_list.clean();
                         }
                         CmdType::SortDevyear => {
+                            if self.lang_list.len() == 0 {
+                                return Err(format!("list is empty"));
+                            } 
                             self.lang_list.sort();
                         }
                         CmdType::DelO => {
@@ -120,12 +123,11 @@ impl Interpenter {
                         _ => {}
                     }
                 }
-                Err(_) => {}
+                Err(err_msg) => {
+                    return Err(err_msg);
+                }
             }
-
         }
-    }
-    fn exec_cmd(&mut self, cmd: CmdType) {
-        todo!()
+        Ok("".to_string())
     }
 }
