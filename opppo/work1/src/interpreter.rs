@@ -1,12 +1,12 @@
 use crate::cmd::{Command, CmdType};
 use crate::list::Slist;
-use crate::entities::Language;
+use crate::entities::{Language, OopLang, ProcedureLang};
 use crate::parser::Parser;
 use crate::lexer::Lexer;
 
 pub(crate) struct Interpenter {
     input: String,
-    lang_list: Slist<Language>
+    lang_list: Slist<Box<dyn Language>>
 }
 
 impl Interpenter {
@@ -16,23 +16,21 @@ impl Interpenter {
 
     pub fn execute(&mut self) {
         for cmd_line in self.input.lines() {
-            print!("#> \"{}\" => ", cmd_line);
+            print!("##> \"{}\" => ", cmd_line);
             let mut lex = Lexer::new(cmd_line.to_owned());
             let tokens = lex.tokenizator();
             let mut p = Parser::new(tokens);
             let c = p.parse();
             println!("{:?}", c);
 
-
-
             match c {
                 Ok(cmd) => {
-                    match cmd.ctype {
+                    match cmd.get_type() {
                         CmdType::AddO(inhtype, devyear) => {
-                            self.lang_list.push(Language::Oop {inheritance_type: inhtype, dev_year: devyear})
+                            self.lang_list.push(Box::new(OopLang::new(inhtype, devyear)) as Box<dyn Language>);
                         }
                         CmdType::AddP(abstract_data_types_support, devyear) => {
-                            self.lang_list.push(Language::Procedure {abstract_data_types: abstract_data_types_support, dev_year:devyear})
+                            self.lang_list.push(Box::new(ProcedureLang::new(abstract_data_types_support, devyear)) as Box<dyn Language>)
                         }
                         CmdType::Print => {
                             println!("{:?}", self.lang_list.peek().unwrap())

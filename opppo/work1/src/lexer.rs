@@ -66,7 +66,7 @@ mod test {
     }
     #[test]
     fn lexer_tokenization() {
-        let mut l = Lexer::new("ADD\n".to_string());
+        let mut l = Lexer::new("ADD".to_string());
         let tokens = l.tokenizator();
         assert_eq!(tokens.len(), 1);
         assert_eq!(tokens.get(0), Some(Token::new(&"ADD".to_string(), 0)).as_ref());

@@ -1,5 +1,4 @@
 use std::{fs, env};
-use std::fs::metadata;
 use crate::interpreter::Interpenter;
 
 mod lexer;

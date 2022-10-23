@@ -1,6 +1,7 @@
 use crate::{entities::InheritanceType, token::{TokenType, Token, self}, interpreter::Interpenter, utils::vecTokenToVecTokenType};
 
 #[derive(Debug)]
+#[derive(Copy, Clone)]
 pub enum CmdType {
     AddP(bool, i32),
     AddO(InheritanceType, i32),
@@ -17,8 +18,9 @@ pub enum CmdType {
 }
 
 #[derive(Debug)]
+#[derive(Clone)]
 pub struct Command {
-    pub ctype: CmdType
+    ctype: CmdType
 }
 
 impl Command {
@@ -28,6 +30,9 @@ impl Command {
             Ok(t) => Ok(Self { ctype: t }),
             Err(err) => Err(err)
         }
+    }
+    pub fn get_type(&self) -> CmdType {
+        self.ctype
     }
     fn match_command_type_by_token(tokens: &Vec<Token>) -> Result<CmdType, String> {
         let tokenTypes = vecTokenToVecTokenType(tokens);
