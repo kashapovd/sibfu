@@ -1,5 +1,6 @@
 use crate::entities::InheritanceType;
 
+/// The set of all possible tokens 
 #[derive(PartialEq)]
 #[derive(Debug)]
 #[derive(Copy, Clone)]
@@ -23,15 +24,25 @@ pub enum TokenType {
     Invalid
 }
 
+/// Represents token object in program
 #[derive(PartialEq)]
 #[derive(Debug)]
 pub struct Token {
+    /// Contains token type
     pub ttype: TokenType,
+    /// Token position in the input string
     pub start_pos: usize,
+    /// A content of token
     pub content: String
 }
 
 impl Token {
+    /// Contructs new token oject
+    /// # Arguments
+    /// * `token_symbol` - Contains Token content as string
+    /// * `start_pos` - Token position in the input string
+    /// # Returns
+    /// New `Token` object
     pub fn new(token_symbol: &String, start_pos: usize) -> Self {
         Self {
             ttype: Self::type_by_str(token_symbol.to_owned()),
@@ -39,12 +50,18 @@ impl Token {
             content: token_symbol.to_owned()
         }
     }
+    /// Try to parse a token content as int value
+    /// # Returns
+    /// `Option` of `i32` value
     pub fn parse_content_as_int(&self) -> Option<i32> {
         match self.content.parse::<i32>() {
             Ok(int32) => Some(int32),
             Err(_) => None
         }
     }
+    /// Try to parse a token content as boolean value
+    /// # Returns
+    /// `Option` of `bool` value
     pub fn parse_content_as_logic(&self) -> Option<bool> {
         match self.content.to_lowercase().as_str() {
             "t" => Some(true),
@@ -52,6 +69,9 @@ impl Token {
             _ => None
         }
     }
+    /// Try to parse a token content as `InheritanceType` enum 
+    /// # Returns
+    /// `Option` of `InheritanceType` value
     pub fn parse_content_inh_type(&self) -> Option<InheritanceType> {
         match self.content.to_ascii_lowercase().as_str() {
             "single" => Some(InheritanceType::Single),
@@ -60,9 +80,15 @@ impl Token {
             _ => None
         }
     }
+    /// Returns a token type
+    /// # Returns
+    /// `TokenType` enum value
     pub fn get_type(&self) -> TokenType {
         self.ttype
-    } 
+    }
+    /// Reconizes token type from a given string
+    /// # Returns
+    /// `TokenType` enum value
     fn type_by_str(token: String) -> TokenType {
         match token.to_ascii_lowercase().as_str() {
             "=" => TokenType::Assign,

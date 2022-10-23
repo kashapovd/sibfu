@@ -6,21 +6,30 @@ use crate::entities::Language;
 
 type Link = *mut Node;
 
+/// Represents circular syngly-linked list in the program
 #[derive(Debug)]
 pub struct Slist {
+    /// Points to a head of the list
     head: Link,
+    /// Points to a tail of the list
     tail: Link,
+    /// Contains current size of the list 
     len: usize
 }
 
+/// Represents the member of linked list 
 #[derive(Debug)]
-
 struct Node {
+    /// Contains the value of `Language` trait  
     elem: Box<dyn Language>,
+    /// Points to the next member
     next: Link,
 }
 
 impl Slist {
+    /// Constructs new object of `Slist`
+    /// # Returns
+    /// New object of `Slist`
     pub fn new() -> Self {
         Slist {
             head: ptr::null_mut(),
@@ -28,7 +37,9 @@ impl Slist {
             len: 0
         }
     }
-
+    /// Performs unsafe push a new value to the list
+    /// # Arguments
+    /// * `elem` - `Language` value to be pushed
     pub fn push(&mut self, elem: Box<dyn Language>) {
         unsafe {
             let new_tail = Box::into_raw(Box::new(Node {
@@ -47,6 +58,10 @@ impl Slist {
         }
         self.len += 1;
     }
+    /// Performs unsafe delete a first member of the list
+    /// # Returns
+    /// `Option` that contains removed `Language` value
+    /// If nothing to remove, just returns `None`
     pub fn pop(&mut self) -> Option<Box<dyn Language>> {
         unsafe {
             if self.head.is_null() {
@@ -67,26 +82,25 @@ impl Slist {
         }
     }
 
+    /// Returns first value of list  
     pub fn peek(&self) -> Option<& Box<dyn Language>> {
         unsafe {
             self.head.as_ref().map(|node| &node.elem)
         }
     }
 
-    pub fn peek_mut(&mut self) -> Option<&mut Box<dyn Language>> {
-        unsafe {
-            self.head.as_mut().map(|node| &mut node.elem)
-        }
-    }
-
+    /// Performs list cleanup by correct termination of objects
     pub fn clean(&mut self) {
         while let Some(_) = self.pop() { }
     }
 
+    /// Performs unsafe delete of membere at given index 
     pub fn delete(&mut self, index: usize) {
+        // use vector to safe needed elements
         let mut elements: Vec<Box<dyn Language>> = Vec::new();
         for i in 0..index+1 {
             if i == index {
+                // remove desired element
                 self.pop();
                 break;
             }
@@ -98,7 +112,8 @@ impl Slist {
         }
     }
 
-    // use sort algo of vec instead of implementing algo for our list
+    /// Performs sorting of list. Uses vector as transition state and uses its
+    /// sort algo instead of implementation algo for our `Slist`
     pub fn sort(&mut self) {
         let mut elements: Vec<Box<dyn Language>> = Vec::new();
         while let Some(e) = self.pop() {
@@ -111,21 +126,25 @@ impl Slist {
         }
     }
 
+    /// Returns a size of the list
+    /// # Returns
+    /// Size of the list as `usize` value
     pub fn len(&self) -> usize {
         self.len
     }
 
-    //iter
-    pub fn into_iter(self) -> IntoIter {
-        IntoIter(self)
-    }
-
+    /// Implements unsafe iterator wrapper for `Slist`
+    /// # Returns
+    /// Imutable Iterator of `Slist`
     pub fn iter(&self) -> Iter<'_> {
         unsafe {
             Iter { next: self.head.as_ref(), len: self.len}
         }
     }
 
+    /// Implements unsafe iterator wrapper for `Slist`
+    /// # Returns
+    /// Mutable Iterator of `Slist`
     pub fn iter_mut(&mut self) -> IterMut<'_> {
         unsafe {
             IterMut { next: self.head.as_mut() }
@@ -133,18 +152,21 @@ impl Slist {
     }
 }
 
+/// Implements destructor of `Slist`
 impl Drop for Slist {
     fn drop(&mut self) {
         self.clean();
     }
 }
 
+/// Implements Display trait for `Node`
 impl<'a> std::fmt::Display for Node {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "{}", self.elem)
     }
 }
 
+/// Implements Display trait for `Slist`
 impl<'a> std::fmt::Display for Slist {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if self.head.is_null() {
@@ -160,11 +182,15 @@ impl<'a> std::fmt::Display for Slist {
 
 pub struct IntoIter(Slist);
 
+/// Represents iterator for linked list
 pub struct Iter<'a> {
+    // Points to next slist value 
     next: Option<&'a Node>,
+    /// Contorl maximum of iterations because of list circularity
     len: usize
 }
 
+/// Represents iterator for linked list
 pub struct IterMut<'a> {
     next: Option<&'a mut Node>,
 }
@@ -176,6 +202,7 @@ impl Iterator for IntoIter {
     }
 }
 
+/// Implements `Iterator` trait for `Iter` object
 impl<'a> Iterator for Iter<'a> {
     type Item = &'a Box<dyn Language>;
 

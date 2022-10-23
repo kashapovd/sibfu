@@ -4,16 +4,27 @@ use crate::entities::{Language, OopLang, ProcedureLang, LanguageType};
 use crate::parser::Parser;
 use crate::lexer::Lexer;
 
+/// Represents interpenter object in the program
 pub(crate) struct Interpenter {
+    /// Input commands as string
     input: String,
+    /// List to be processed with commands
     lang_list: Slist
 }
 
 impl Interpenter {
+    /// Contructs new `Interpenter` object from a given string
+    /// # Arguments
+    /// * `input` - Contains input string to interpet
+    /// # Returns
+    /// New `Interpenter` object
     pub fn new(input: String) -> Self {
         Self { input, lang_list: Slist::new() }
     }
 
+    /// Executes a given input
+    /// # Returns
+    /// `Result` with succes or err message
     pub fn execute(&mut self) -> Result<String, String> {
         for cmd_line in self.input.lines() {
             print!("##> \"{}\" => ", cmd_line);

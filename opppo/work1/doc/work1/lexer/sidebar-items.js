@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Lexer","Represents lexer object in the program"]]};

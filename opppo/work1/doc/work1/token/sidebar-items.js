@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["TokenType","The set of all possible tokens "]],"struct":[["Token","Represents token object in program"]]};

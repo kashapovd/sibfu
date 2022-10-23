@@ -10,6 +10,7 @@ mod parser;
 mod cmd;
 mod utils;
 
+/// program entry point. Opens files and creates `Interpenter` object
 fn main() -> std::io::Result<()> {
     if env::args().nth(1).is_none() {
         panic!("Please, specify source file");

@@ -36,6 +36,7 @@ impl std::fmt::Display for LanguageType {
     }
 }
 
+/// Represents Object Oriented Language object in program
 #[derive(Debug)]
 #[derive(PartialEq, PartialOrd)]
 pub struct OopLang {
@@ -43,6 +44,7 @@ pub struct OopLang {
     pub dev_year: i32
 }
 
+/// Represents Procedure Language object in program
 #[derive(Debug)]
 #[derive(PartialEq, PartialOrd)]
 pub struct ProcedureLang {
@@ -51,22 +53,38 @@ pub struct ProcedureLang {
 }
 
 impl ProcedureLang {
+    /// Contructs new `ProcedureLang` object from a given string
+    /// # Arguments
+    /// * `abstract_data_types` - Contains logic value about supporting abstract data types
+    /// * `dev_year` - Contains numeric value about year of language developments
+    /// # Returns
+    /// New `ProcedureLang` object
     pub fn new(abstract_data_types: bool, dev_year: i32) -> Self {
         ProcedureLang { abstract_data_types, dev_year }
     }
 }
 
 impl OopLang {
+    /// Contructs new `OopLang` object from a given string
+    /// # Arguments
+    /// * `inh_type` - Contains type of language inheritance
+    /// * `dev_year` - Contains numeric value about year of language developments
+    /// # Returns
+    /// New `OopLang` object
     pub fn new(inh_type: InheritanceType, dev_year: i32) -> Self {
         OopLang { inh_type, dev_year }
     }
 }
 
+/// Represents Language object in program as trait
 pub trait Language {
+    // Returns the year of language development
     fn get_devyear(&self) -> i32;
+    // Returns a type of language
     fn get_type(&self) -> LanguageType;
 }
 
+/// Impelements Language trait for Object Oriented Language object
 impl Language for OopLang {
     fn get_devyear(&self) -> i32 {
         self.dev_year
@@ -76,6 +94,7 @@ impl Language for OopLang {
     }
 }
 
+/// Impelements Language trait for Procedure Language object
 impl Language for ProcedureLang {
     fn get_devyear(&self) -> i32 {
         self.dev_year
@@ -85,6 +104,7 @@ impl Language for ProcedureLang {
     }
 }
 
+/// Expands Language trait with Display trait
 impl fmt::Display for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self.get_type() {
@@ -94,26 +114,31 @@ impl fmt::Display for dyn Language {
     }
 }
 
+/// Expands Language trait with Debug trait
 impl Debug for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "lang: {:?}", self.get_type())
     }
 }
 
+/// Expands Language trait with Ord trait for sorting and comparing
 impl Ord for dyn Language {
     fn cmp(&self, other: &Self) -> Ordering {
         self.get_devyear().cmp(&other.get_devyear())
     }
 }
 
+/// Expands Language trait just as dependency of Ord
 impl Eq for dyn Language {}
 
+/// Expands Language trait with PartialOrd trait for sorting and comparing
 impl PartialOrd for dyn Language {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(self.cmp(other))
     }
 }
 
+/// Expands Language trait with PartialEq trait for sorting and comparing
 impl PartialEq for dyn Language {
     fn eq(&self, other: &Self) -> bool {
         self.get_devyear() == other.get_devyear()

@@ -1,18 +1,29 @@
 use crate::token::Token;
 
+/// Represents lexer object in the program
 #[derive(Debug)]
 pub struct Lexer {
+    /// Contains vector of input chars
     content: Vec<char>,
+    /// Contains current position that points to char
     pos: usize
 }
 
 impl Lexer {
+    /// Contructs new `Lexer` object from a given string
+    /// # Arguments
+    /// * `content` - Contains input string to lex
+    /// # Returns
+    /// New `Lexer` object
     pub fn new(content: String) -> Self {
         Self {
             content: content.chars().collect(),
             pos: 0
         }
     }
+    /// Process input string and creates tokens from
+    /// # Returns
+    /// Vector of `Token` objects
     pub fn tokenizator(&mut self) -> Vec<Token> {
         let mut tokens: Vec<Token> = Vec::new();
         while self.pos < self.content.len() {
@@ -35,6 +46,9 @@ impl Lexer {
         }
         tokens
     }
+    /// Tries to read a given char subset as word or number\
+    /// # Returns
+    /// Tuple of result `String` and its start position in the input 
     fn read_word_or_num(&mut self) -> (String, usize) {
         let mut buff: String = String::new();
         let keyword_pos = self.pos;

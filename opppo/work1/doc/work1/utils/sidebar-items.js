@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["pop_front_vec","Implements method `pop_front` for vector which doesn’t support it"],["vec_token_to_vec_token_type","Transorm vector of token to vector of token types"]]};

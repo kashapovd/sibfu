@@ -17,12 +17,18 @@ pub enum CmdType {
     Flush
 }
 
+/// Represents command object in program
 #[derive(Debug)]
 pub struct Command {
     ctype: CmdType
 }
 
 impl Command {
+    /// Contructs new `Command` object from a given tokens by matching
+    /// # Arguments
+    /// * `tokens` - Vector of tokens to be matched
+    /// # Returns
+    /// New `Command` object
     pub fn new(tokens: &Vec<Token>) -> Result<Self, String> {
         let ctype = Self::match_command_type_by_token(tokens);
         match ctype {
@@ -30,9 +36,15 @@ impl Command {
             Err(err) => Err(err)
         }
     }
+    /// Returns a type of command
     pub fn get_type(&self) -> CmdType {
         self.ctype
     }
+    /// Matches command type from a given tokens subset
+    /// # Arguments
+    /// * `tokens` - Input tokens to be mached
+    /// # Returns
+    /// `Result` with command type or error message
     fn match_command_type_by_token(tokens: &Vec<Token>) -> Result<CmdType, String> {
         let token_types = vec_token_to_vec_token_type(tokens);
         match token_types.as_slice() {

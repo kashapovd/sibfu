@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["IntoIter",""],["Iter","Represents iterator for linked list"],["IterMut","Represents iterator for linked list"],["Node","Represents the member of linked list "],["Slist","Represents circular syngly-linked list in the program"]],"type":[["Link",""]]};
