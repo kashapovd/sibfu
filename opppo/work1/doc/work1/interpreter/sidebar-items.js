@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["Interpenter","Represents interpenter object in the program"]]};

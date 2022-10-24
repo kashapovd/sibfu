@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":[["main","program entry point. Opens files and creates `Interpenter` object"]],"mod":[["cmd",""],["entities",""],["interpreter",""],["lexer",""],["list",""],["parser",""],["token",""],["utils",""]]};

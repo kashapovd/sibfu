@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":[["InheritanceType",""],["LanguageType",""]],"struct":[["OopLang","Represents Object Oriented Language object in program"],["ProcedureLang","Represents Procedure Language object in program"]],"trait":[["Language","Represents Language object in program as trait"]]};
