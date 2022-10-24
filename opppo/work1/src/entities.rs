@@ -108,8 +108,8 @@ impl Language for ProcedureLang {
 impl fmt::Display for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self.get_type() {
-            LanguageType::Procedure(p) => writeln!(f, "lang:\n\ttype: {},\n\tSupport abstract types: {},\n\tYear of development: {}",  self.get_type(), p.abstract_data_types, p.dev_year),
-            LanguageType::Oop(o) => writeln!(f, "lang:\n\ttype: {},\n\tSupport abstract types: {},\n\tYear of development: {}",  self.get_type(), o.get_type(), o.dev_year),
+            LanguageType::Procedure(p) => writeln!(f, "lang:\n\tType: {},\n\tSupport abstract types: {},\n\tYear of development: {}",  self.get_type(), p.abstract_data_types, p.dev_year),
+            LanguageType::Oop(o) => writeln!(f, "lang:\n\tType: {},\n\tType of inheritance: {},\n\tYear of development: {}",  self.get_type(), o.inh_type, o.dev_year),
         }
     }
 }
