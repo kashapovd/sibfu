@@ -108,7 +108,7 @@ impl Token {
             "inhtype" => TokenType::InhtypeInnerKeyword,
             "single" => TokenType::InhType,
             "multiple" => TokenType::InhType,
-            "intefrace" => TokenType::InhType,
+            "interface" => TokenType::InhType,
             _ if token.parse::<i32>().is_ok() => TokenType::Num,
             _ => TokenType::Invalid
         }
