@@ -3,6 +3,7 @@ use crate::list::Slist;
 use crate::entities::{Language, OopLang, ProcedureLang, LanguageType};
 use crate::parser::Parser;
 use crate::lexer::Lexer;
+use chrono::{self, Datelike};
 
 /// Represents interpenter object in the program
 pub(crate) struct Interpenter {
@@ -25,7 +26,7 @@ impl Interpenter {
     /// Executes a given input
     /// # Returns
     /// `Result` with succes or err message
-    pub fn execute(&mut self) -> Result<String, String> {
+    pub fn execute(&mut self) {
         for cmd_line in self.input.lines() {
             print!("##> \"{}\" => ", cmd_line);
             let mut lex = Lexer::new(cmd_line.to_owned());
@@ -49,10 +50,17 @@ impl Interpenter {
                             self.lang_list.clean();
                         }
                         CmdType::SortDevyear => {
-                            if self.lang_list.len() == 0 {
-                                return Err(format!("list is empty"));
-                            } 
                             self.lang_list.sort();
+                        }
+                        CmdType::Diff => {
+                            if !self.lang_list.is_empty() {
+                                let current_year = chrono::Utc::now().year();
+                                println!("Current year: {current_year}");
+                                for e in self.lang_list.iter() {
+                                    print!("{}", e);
+                                    println!("\tyear diff: {}", current_year - e.get_devyear());
+                                }
+                            }
                         }
                         CmdType::DelO => {
                             while let Some(index) = self.lang_list.iter().position(
@@ -134,11 +142,8 @@ impl Interpenter {
                         _ => {}
                     }
                 }
-                Err(err_msg) => {
-                    return Err(err_msg);
-                }
+                Err(_) => {},
             }
         }
-        Ok("".to_string())
     }
 }

@@ -13,6 +13,7 @@ pub enum CmdType {
     DelIfPAdt(bool),
     DelIfOInhtype(InheritanceType),
     SortDevyear,
+    Diff,
     Print,
     Flush
 }
@@ -53,6 +54,9 @@ impl Command {
             }
             [TokenType::Flush] => { 
                 Ok(CmdType::Flush) 
+            }
+            [TokenType::Diff] => { 
+                Ok(CmdType::Diff) 
             }
             [TokenType::Sort] => { 
                 Ok(CmdType::SortDevyear) 

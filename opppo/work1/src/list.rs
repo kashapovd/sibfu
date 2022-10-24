@@ -133,6 +133,16 @@ impl Slist {
         self.len
     }
 
+    /// Checks that list is empty 
+    /// # Returns
+    /// true if list is empty, false otherwise 
+    pub fn is_empty(&self) -> bool {
+        match self.len {
+            0 => true,
+            _ => false
+        }
+    }
+
     /// Implements unsafe iterator wrapper for `Slist`
     /// # Returns
     /// Imutable Iterator of `Slist`

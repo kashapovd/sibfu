@@ -10,6 +10,7 @@ pub enum TokenType {
     Add,
     Print,
     Del,
+    Diff,
     Assign,
     Dot,
     Num,
@@ -109,6 +110,7 @@ impl Token {
             "single" => TokenType::InhType,
             "multiple" => TokenType::InhType,
             "interface" => TokenType::InhType,
+            "diff" => TokenType::Diff,
             _ if token.parse::<i32>().is_ok() => TokenType::Num,
             _ => TokenType::Invalid
         }
