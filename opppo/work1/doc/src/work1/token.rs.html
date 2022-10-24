@@ -157,6 +157,8 @@
 <span id="151">151</span>
 <span id="152">152</span>
 <span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::entities::InheritanceType</span>;
 
 <span class="doccomment">/// The set of all possible tokens </span>
@@ -169,6 +171,7 @@
     <span class="ident">Add</span>,
     <span class="ident">Print</span>,
     <span class="ident">Del</span>,
+    <span class="ident">Diff</span>,
     <span class="ident">Assign</span>,
     <span class="ident">Dot</span>,
     <span class="ident">Num</span>,
@@ -267,7 +270,8 @@
             <span class="string">&quot;inhtype&quot;</span> =&gt; <span class="ident">TokenType::InhtypeInnerKeyword</span>,
             <span class="string">&quot;single&quot;</span> =&gt; <span class="ident">TokenType::InhType</span>,
             <span class="string">&quot;multiple&quot;</span> =&gt; <span class="ident">TokenType::InhType</span>,
-            <span class="string">&quot;intefrace&quot;</span> =&gt; <span class="ident">TokenType::InhType</span>,
+            <span class="string">&quot;interface&quot;</span> =&gt; <span class="ident">TokenType::InhType</span>,
+            <span class="string">&quot;diff&quot;</span> =&gt; <span class="ident">TokenType::Diff</span>,
             <span class="kw">_</span> <span class="kw">if</span> <span class="ident">token</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>().<span class="ident">is_ok</span>() =&gt; <span class="ident">TokenType::Num</span>,
             <span class="kw">_</span> =&gt; <span class="ident">TokenType::Invalid</span>
         }

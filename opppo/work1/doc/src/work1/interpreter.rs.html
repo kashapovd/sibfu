@@ -148,11 +148,17 @@
 <span id="142">142</span>
 <span id="143">143</span>
 <span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::cmd::CmdType</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::list::Slist</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::entities</span>::{<span class="ident">Language</span>, <span class="ident">OopLang</span>, <span class="ident">ProcedureLang</span>, <span class="ident">LanguageType</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::parser::Parser</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::lexer::Lexer</span>;
+<span class="kw">use</span> <span class="ident">chrono</span>::{<span class="self">self</span>, <span class="ident">Datelike</span>};
 
 <span class="doccomment">/// Represents interpenter object in the program</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Interpenter</span> {
@@ -175,7 +181,7 @@
     <span class="doccomment">/// Executes a given input</span>
     <span class="doccomment">/// # Returns</span>
     <span class="doccomment">/// `Result` with succes or err message</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">String</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="kw">for</span> <span class="ident">cmd_line</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">lines</span>() {
             <span class="macro">print!</span>(<span class="string">&quot;##&gt; \&quot;{}\&quot; =&gt; &quot;</span>, <span class="ident">cmd_line</span>);
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lex</span> <span class="op">=</span> <span class="ident">Lexer::new</span>(<span class="ident">cmd_line</span>.<span class="ident">to_owned</span>());
@@ -199,10 +205,17 @@
                             <span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">clean</span>();
                         }
                         <span class="ident">CmdType::SortDevyear</span> =&gt; {
-                            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;list is empty&quot;</span>));
-                            } 
                             <span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">sort</span>();
+                        }
+                        <span class="ident">CmdType::Diff</span> =&gt; {
+                            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">is_empty</span>() {
+                                <span class="kw">let</span> <span class="ident">current_year</span> <span class="op">=</span> <span class="ident">chrono::Utc::now</span>().<span class="ident">year</span>();
+                                <span class="macro">println!</span>(<span class="string">&quot;Current year: {current_year}&quot;</span>);
+                                <span class="kw">for</span> <span class="ident">e</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">iter</span>() {
+                                    <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">e</span>);
+                                    <span class="macro">println!</span>(<span class="string">&quot;\tyear diff: {}&quot;</span>, <span class="ident">current_year</span> <span class="op">-</span> <span class="ident">e</span>.<span class="ident">get_devyear</span>());
+                                }
+                            }
                         }
                         <span class="ident">CmdType::DelO</span> =&gt; {
                             <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">iter</span>().<span class="ident">position</span>(
@@ -284,12 +297,9 @@
                         <span class="kw">_</span> =&gt; {}
                     }
                 }
-                <span class="prelude-val">Err</span>(<span class="ident">err_msg</span>) =&gt; {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">err_msg</span>);
-                }
+                <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {},
             }
         }
-        <span class="prelude-val">Ok</span>(<span class="string">&quot;&quot;</span>.<span class="ident">to_string</span>())
     }
 }</code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="work1" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>

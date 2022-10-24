@@ -99,6 +99,10 @@
 <span id="93">93</span>
 <span id="94">94</span>
 <span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">entities::InheritanceType</span>, <span class="ident">token</span>::{<span class="ident">TokenType</span>, <span class="ident">Token</span>}, <span class="ident">utils::vec_token_to_vec_token_type</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -114,6 +118,7 @@
     <span class="ident">DelIfPAdt</span>(<span class="ident">bool</span>),
     <span class="ident">DelIfOInhtype</span>(<span class="ident">InheritanceType</span>),
     <span class="ident">SortDevyear</span>,
+    <span class="ident">Diff</span>,
     <span class="ident">Print</span>,
     <span class="ident">Flush</span>
 }
@@ -154,6 +159,9 @@
             }
             [<span class="ident">TokenType::Flush</span>] =&gt; { 
                 <span class="prelude-val">Ok</span>(<span class="ident">CmdType::Flush</span>) 
+            }
+            [<span class="ident">TokenType::Diff</span>] =&gt; { 
+                <span class="prelude-val">Ok</span>(<span class="ident">CmdType::Diff</span>) 
             }
             [<span class="ident">TokenType::Sort</span>] =&gt; { 
                 <span class="prelude-val">Ok</span>(<span class="ident">CmdType::SortDevyear</span>) 
