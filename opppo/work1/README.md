@@ -23,4 +23,10 @@ cargo run src/test.file --release
 ```
 Enjoy the program!
 ## Docs
-Docs are genereted by ultimate cargo utility. See docs at the doc/ directory
+Docs are genereted by ultimate cargo utility. See docs at the doc/ directory.
+
+You can open docs in your browser! Clone repo and execute:
+```
+cd sibfu/opppo/work1
+cargo doc --open --target-dir .
+```
