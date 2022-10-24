@@ -213,7 +213,7 @@
                                 <span class="macro">println!</span>(<span class="string">&quot;Current year: {current_year}&quot;</span>);
                                 <span class="kw">for</span> <span class="ident">e</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">lang_list</span>.<span class="ident">iter</span>() {
                                     <span class="macro">print!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">e</span>);
-                                    <span class="macro">println!</span>(<span class="string">&quot;\tyear diff: {}&quot;</span>, <span class="ident">current_year</span> <span class="op">-</span> <span class="ident">e</span>.<span class="ident">get_devyear</span>());
+                                    <span class="macro">println!</span>(<span class="string">&quot;+--&gt;\tYear diff: {}&quot;</span>, <span class="ident">current_year</span> <span class="op">-</span> <span class="ident">e</span>.<span class="ident">get_devyear</span>());
                                 }
                             }
                         }

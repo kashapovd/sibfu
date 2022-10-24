@@ -32,6 +32,7 @@
 <span id="26">26</span>
 <span id="27">27</span>
 <span id="28">28</span>
+<span id="29">29</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fs</span>, <span class="ident">env</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::interpreter::Interpenter</span>;
 
@@ -56,6 +57,7 @@
     <span class="kw">if</span> <span class="ident">source</span>.<span class="ident">is_empty</span>() {
         <span class="macro">panic!</span>(<span class="string">&quot;Source file cannot be empty&quot;</span>)
     }
+    <span class="ident">source</span>.<span class="ident">trim</span>();
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">Interpenter::new</span>(<span class="ident">source</span>);
     <span class="ident">i</span>.<span class="ident">execute</span>();
