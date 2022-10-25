@@ -21,17 +21,17 @@ void configurePWM() {
 	TIMSK =(1<<OCIE0)|(1<<TOIE0);
 	switch(mode) {
 		case 1:
-		TCCR0 = 1 << CS00 | 1 << CS01; // normal
-		break;
+			TCCR0 = 1 << CS00 | 1 << CS01; // normal
+			break;
 		case 2:
-		TCCR0 = 1 << COM01| 1 << COM00 | 1 << WGM00 | 1 << CS00 | 1 << CS01; // phase
-		break;
+			TCCR0 = 1 << COM01| 1 << COM00 | 1 << WGM00 | 1 << CS00 | 1 << CS01; // phase
+			break;
 		case 3:
-		TCCR0 = 1 << WGM01 | 1 << CS00 | 1 << CS01;
-		break;
+			TCCR0 = 1 << WGM01 | 1 << CS00 | 1 << CS01;
+			break;
 		default:
-		TCCR0 = 1 << COM01| 1 << COM00 | 1 << WGM01 | 1 << WGM00 | 1 << CS00 | 1 << CS01; // fast
-		break;
+			TCCR0 = 1 << COM01| 1 << COM00 | 1 << WGM01 | 1 << WGM00 | 1 << CS00 | 1 << CS01; // fast
+			break;
 	}
 }
 
@@ -50,11 +50,11 @@ ISR (TIMER0_OVF_vect) {
 ISR (TIMER0_COMP_vect) {
 	switch(mode) {
 		case 3:
-		PORTB ^= (1<<3);
-		break;
+			PORTB ^= (1<<3);
+			break;
 		default:
-		PORTB |= (1<<3);
-		break;
+			PORTB |= (1<<3);
+			break;
 	}
 }
 
