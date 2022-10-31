@@ -12,7 +12,7 @@
 #define LCD_D5	 		1
 #define LCD_D6	 		2
 #define LCD_D7	 		3
-#define LCD_SEND_DELAY 		1
+#define LCD_SEND_DELAY 		5
 
 #define LCD_CMD                      0x00
 #define LCD_DATA                     0xFF

@@ -17,7 +17,7 @@ void HD44780::write4(const uint8_t state, const uint8_t byte) {
   LCD_PORT |= 1<<LCD_E;
   LCD_PORT &= 0xf0;
   LCD_PORT |= byte & 0x0f;
-  _delay_us(5);
+  _delay_us(15);
   LCD_PORT &= ~(1<<LCD_E);
 }
 
@@ -60,7 +60,7 @@ void HD44780::put(uint8_t c) {
 }
 
 void HD44780::put(char *str) {
-   while(str)
+   while(*str)
       write8_data(*str++);
 }
 
@@ -115,5 +115,4 @@ uint8_t* HD44780::_loadHalfRow(uint8_t *buff, uint8_t size) {
       buff += 5;
    }
    return buff;
-   
 }
