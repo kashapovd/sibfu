@@ -2,7 +2,7 @@
  * lcd.cpp
  *
  * Created: 31.10.2022 3:03:40
- * Author : @kashapovd, @nuard
+ * Author : @kashapovd, @nuark
  */ 
 
 #include <avr/io.h>
