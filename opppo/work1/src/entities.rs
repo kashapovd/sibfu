@@ -24,7 +24,8 @@ impl std::fmt::Display for InheritanceType {
 #[derive(PartialEq)]
 pub enum LanguageType {
     Procedure(ProcedureLang),
-    Oop(OopLang)
+    Oop(OopLang),
+    Functional(FuncLang)
 }
 
 impl std::fmt::Display for LanguageType {
@@ -32,6 +33,7 @@ impl std::fmt::Display for LanguageType {
         match self {
             LanguageType::Procedure(_) => write!(f, "procedure"),
             LanguageType::Oop(_) => write!(f, "object-oriented"),
+            LanguageType::Functional(_) => write!(f, "functional"),
         }
     }
 }
@@ -52,6 +54,14 @@ pub struct ProcedureLang {
     pub dev_year: i32
 }
 
+/// Represents Functional Language object in program
+#[derive(Debug)]
+#[derive(PartialEq, PartialOrd)]
+pub struct FuncLang {
+    pub purity_support: bool,
+    pub dev_year: i32
+}
+
 impl ProcedureLang {
     /// Contructs new `ProcedureLang` object from a given string
     /// # Arguments
@@ -67,12 +77,24 @@ impl ProcedureLang {
 impl OopLang {
     /// Contructs new `OopLang` object from a given string
     /// # Arguments
-    /// * `inh_type` - Contains type of language inheritance
+    /// * `purity_support` - Contains logic value about supporting abstract data types
     /// * `dev_year` - Contains numeric value about year of language developments
     /// # Returns
     /// New `OopLang` object
     pub fn new(inh_type: InheritanceType, dev_year: i32) -> Self {
         OopLang { inh_type, dev_year }
+    }
+}
+
+impl FuncLang {
+    /// Contructs new `FuncLang` object from a given string
+    /// # Arguments
+    /// * `inh_type` - Contains type of language inheritance
+    /// * `dev_year` - Contains numeric value about year of language developments
+    /// # Returns
+    /// New `OopLang` object
+    pub fn new(purity_support: bool, dev_year: i32) -> Self {
+        FuncLang { purity_support, dev_year }
     }
 }
 
@@ -104,12 +126,22 @@ impl Language for ProcedureLang {
     }
 }
 
+impl Language for FuncLang {
+    fn get_devyear(&self) -> i32 {
+        self.dev_year
+    }
+    fn get_type(&self) -> LanguageType {
+        LanguageType::Functional(FuncLang { purity_support: self.purity_support, dev_year: self.dev_year })
+    }
+}
+
 /// Expands Language trait with Display trait
 impl fmt::Display for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self.get_type() {
             LanguageType::Procedure(p) => writeln!(f, "lang:\n\tType: {},\n\tSupport abstract types: {},\n\tYear of development: {}",  self.get_type(), p.abstract_data_types, p.dev_year),
             LanguageType::Oop(o) => writeln!(f, "lang:\n\tType: {},\n\tType of inheritance: {},\n\tYear of development: {}",  self.get_type(), o.inh_type, o.dev_year),
+            LanguageType::Functional(func) => writeln!(f, "lang:\n\tType: {},\n\tSupport purity: {},\n\tYear of development: {}",  self.get_type(), func.purity_support, func.dev_year),
         }
     }
 }

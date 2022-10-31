@@ -4,8 +4,10 @@ use crate::{entities::InheritanceType, token::{TokenType, Token}, utils::vec_tok
 #[derive(Copy, Clone)]
 pub enum CmdType {
     AddP(bool, i32),
+    AddF(bool, i32),
     AddO(InheritanceType, i32),
     DelP,
+    DelF,
     DelO,
     DelIfDevyear(i32),
     DelIfPDevyear(i32),
@@ -65,12 +67,19 @@ impl Command {
                 Ok(CmdType::AddP(tokens.get(2).unwrap().parse_content_as_logic().unwrap(), 
                                  tokens.get(3).unwrap().parse_content_as_int().unwrap())) 
             }
+            [TokenType::Add, TokenType::Functional, TokenType::Logic, TokenType::Num] => { 
+                Ok(CmdType::AddF(tokens.get(2).unwrap().parse_content_as_logic().unwrap(), 
+                                 tokens.get(3).unwrap().parse_content_as_int().unwrap())) 
+            }
             [TokenType::Add, TokenType::Oop, TokenType::InhType, TokenType::Num] => { 
                 Ok(CmdType::AddO(tokens.get(2).unwrap().parse_content_inh_type().unwrap(), 
                                  tokens.get(3).unwrap().parse_content_as_int().unwrap())) 
             }
             [TokenType::Del, TokenType::Procedure] => { 
                 Ok(CmdType::DelP) 
+            }
+            [TokenType::Del, TokenType::Functional] => { 
+                Ok(CmdType::DelF) 
             }
             [TokenType::Del, TokenType::Oop] => { 
                 Ok(CmdType::DelO) 

@@ -22,6 +22,7 @@ fn main() {
     if source.is_empty() {
         panic!("Source file cannot be empty")
     }
+    source.trim();
 
     let mut i = Interpenter::new(source);
     i.execute();

@@ -1,7 +1,7 @@
-ADD procedure T 1
-ADD procedure T 2
-ADD procedure T 3
-ADD procedure T 4
-DEL if devyear=1
-DEL if devyear=4
+ADD oop single 1950
+ADD oop interface 1928
+ADD procedure T 1970
+ADD functional F 1964
+PRINT
+SORT
 PRINT
