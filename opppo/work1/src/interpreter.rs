@@ -1,6 +1,6 @@
 use crate::cmd::CmdType;
 use crate::list::Slist;
-use crate::entities::{Language, OopLang, ProcedureLang, LanguageType};
+use crate::entities::{Language, OopLang, ProcedureLang, LanguageType, FuncLang};
 use crate::parser::Parser;
 use crate::lexer::Lexer;
 use chrono::{self, Datelike};
@@ -43,6 +43,9 @@ impl Interpenter {
                         CmdType::AddP(abstract_data_types_support, devyear) => {
                             self.lang_list.push(Box::new(ProcedureLang::new(abstract_data_types_support, devyear)) as Box<dyn Language>)
                         }
+                        CmdType::AddF(purity_support, devyear) => {
+                            self.lang_list.push(Box::new(FuncLang::new(purity_support, devyear)) as Box<dyn Language>)
+                        }
                         CmdType::Print => {
                             println!("{}", self.lang_list)
                         }
@@ -58,7 +61,7 @@ impl Interpenter {
                                 println!("Current year: {current_year}");
                                 for e in self.lang_list.iter() {
                                     print!("{}", e);
-                                    println!("\tyear diff: {}", current_year - e.get_devyear());
+                                    println!("+-->\tYear diff: {}", current_year - e.get_devyear());
                                 }
                             }
                         }
@@ -68,6 +71,7 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Oop(_) => true,
                                     LanguageType::Procedure(_) => false,
+                                    LanguageType::Functional(_) => false,
                                 }
                             ) {
                                 self.lang_list.delete(index);
@@ -79,6 +83,19 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Procedure(_) => true,
                                     LanguageType::Oop(_) => false,
+                                    LanguageType::Functional(_) => todo!(),
+                                }
+                            ) {
+                                self.lang_list.delete(index);
+                            }
+                        }
+                        CmdType::DelF => {
+                            while let Some(index) = self.lang_list.iter().position(
+                                |x|
+                                match x.get_type() {
+                                    LanguageType::Procedure(_) => false,
+                                    LanguageType::Oop(_) => false,
+                                    LanguageType::Functional(_) => true,
                                 }
                             ) {
                                 self.lang_list.delete(index);
@@ -90,6 +107,7 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Procedure(p) => p.get_devyear() == year,
                                     LanguageType::Oop(o) => o.get_devyear() == year,
+                                    LanguageType::Functional(_) => todo!(),
                                 }
                             ) {
                                 self.lang_list.delete(index);
@@ -101,6 +119,7 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Procedure(p) => p.get_devyear() == year,
                                     LanguageType::Oop(_) => false,
+                                    LanguageType::Functional(_) => todo!(),
                                 }
                             ) {
                                 self.lang_list.delete(index);
@@ -112,6 +131,7 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Procedure(_) => false,
                                     LanguageType::Oop(o) => o.get_devyear() == year,
+                                    LanguageType::Functional(_) => todo!(),
                                 }
                             ) {
                                 self.lang_list.delete(index);
@@ -123,6 +143,7 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Procedure(_) => false,
                                     LanguageType::Oop(o) => o.get_type() == LanguageType::Oop(OopLang{inh_type, dev_year: o.get_devyear()}),
+                                    LanguageType::Functional(_) => todo!(),
                                 }
                             ) {
                                 self.lang_list.delete(index);
@@ -134,6 +155,7 @@ impl Interpenter {
                                 match x.get_type() {
                                     LanguageType::Procedure(p) => p.get_type() == LanguageType::Procedure(ProcedureLang{abstract_data_types: adt, dev_year: p.get_devyear()}),
                                     LanguageType::Oop(_) => false,
+                                    LanguageType::Functional(_) => todo!(),
                                 }
                             ) {
                                 self.lang_list.delete(index);

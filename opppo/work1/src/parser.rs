@@ -37,7 +37,7 @@ impl Parser {
                 }     
             }  
         } else {
-            Err(format!("Source file cannot be empty"))
+            Err(format!("Source line cannot be empty"))
         }
     }    
 }
