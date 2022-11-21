@@ -21,10 +21,10 @@ void configurePWM() {
 	TIMSK =(1<<OCIE0)|(1<<TOIE0);
 	switch(mode) {
 		case 1:
-			TCCR0 = 1 << CS00 | 1 << CS01; // normal
+			TCCR0 = 1 << CS00 | 1 << CS02; // normal
 			break;
 		case 2:
-			TCCR0 = 1 << COM01| 1 << COM00 | 1 << WGM00 | 1 << CS00 | 1 << CS01; // phase
+			TCCR0 = 1 << COM01| 1 << COM00 | 1 << WGM00 | 1 << CS02; // phase
 			break;
 		case 3:
 			TCCR0 = 1 << WGM01 | 1 << CS00 | 1 << CS01;
@@ -63,7 +63,7 @@ ISR(INT1_vect){
 		isStarted = true;
 		PORTB = 0xFF;
 		configurePWM();
-		
+
 	}
 	else {
 		TCCR0 = 0;
