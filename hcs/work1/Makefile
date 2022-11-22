@@ -1,12 +1,12 @@
-INC=-I/opt/cuda/include
-NVCC=/opt/cuda/bin/nvcc
-NVCC_OPT=-std=c++11
+INC=-I/usr/local/cuda/include -I../Common
+NVCC=/usr/local/cuda/bin/nvcc 
+NVCC_OPT=-std=c++11 -ccbin g++ -m64
 
 all:
-	$(NVCC) $(NVCC_OPT) array-add.cu -o array-add.out
+	$(NVCC) $(NVCC_OPT) $(INC) array-add.cu -o array-add.out
 
 clean:
-	rm -f vector-add
+	rm -f array-add.out
 
-run:
+run: all
 	./array-add.out
