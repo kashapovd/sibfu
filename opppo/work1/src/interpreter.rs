@@ -1,8 +1,8 @@
 use crate::cmd::CmdType;
-use crate::list::Slist;
-use crate::entities::{Language, OopLang, ProcedureLang, LanguageType, FuncLang};
-use crate::parser::Parser;
+use crate::entities::{FuncLang, Language, LanguageType, OopLang, ProcedureLang};
 use crate::lexer::Lexer;
+use crate::list::Slist;
+use crate::parser::Parser;
 use chrono::{self, Datelike};
 
 /// Represents interpenter object in the program
@@ -10,7 +10,7 @@ pub(crate) struct Interpenter {
     /// Input commands as string
     input: String,
     /// List to be processed with commands
-    lang_list: Slist
+    lang_list: Slist,
 }
 
 impl Interpenter {
@@ -20,7 +20,10 @@ impl Interpenter {
     /// # Returns
     /// New `Interpenter` object
     pub fn new(input: String) -> Self {
-        Self { input, lang_list: Slist::new() }
+        Self {
+            input,
+            lang_list: Slist::new(),
+        }
     }
 
     /// Executes a given input
@@ -40,12 +43,14 @@ impl Interpenter {
                         CmdType::AddO(inhtype, devyear) => {
                             self.lang_list.push(Box::new(OopLang::new(inhtype, devyear)) as Box<dyn Language>);
                         }
-                        CmdType::AddP(abstract_data_types_support, devyear) => {
-                            self.lang_list.push(Box::new(ProcedureLang::new(abstract_data_types_support, devyear)) as Box<dyn Language>)
-                        }
-                        CmdType::AddF(purity_support, devyear) => {
-                            self.lang_list.push(Box::new(FuncLang::new(purity_support, devyear)) as Box<dyn Language>)
-                        }
+                        CmdType::AddP(abstract_data_types_support, devyear) => self.lang_list.push(
+                            Box::new(ProcedureLang::new(abstract_data_types_support, devyear))
+                                as Box<dyn Language>,
+                        ),
+                        CmdType::AddF(purity_support, devyear) => self
+                            .lang_list
+                            .push(Box::new(FuncLang::new(purity_support, devyear))
+                                as Box<dyn Language>),
                         CmdType::Print => {
                             println!("{}", self.lang_list)
                         }
@@ -66,105 +71,109 @@ impl Interpenter {
                             }
                         }
                         CmdType::DelO => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Oop(_) => true,
                                     LanguageType::Procedure(_) => false,
                                     LanguageType::Functional(_) => false,
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelP => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Procedure(_) => true,
                                     LanguageType::Oop(_) => false,
                                     LanguageType::Functional(_) => todo!(),
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelF => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Procedure(_) => false,
                                     LanguageType::Oop(_) => false,
                                     LanguageType::Functional(_) => true,
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelIfDevyear(year) => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Procedure(p) => p.get_devyear() == year,
                                     LanguageType::Oop(o) => o.get_devyear() == year,
                                     LanguageType::Functional(_) => todo!(),
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelIfPDevyear(year) => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Procedure(p) => p.get_devyear() == year,
                                     LanguageType::Oop(_) => false,
                                     LanguageType::Functional(_) => todo!(),
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelIfODevyear(year) => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Procedure(_) => false,
                                     LanguageType::Oop(o) => o.get_devyear() == year,
                                     LanguageType::Functional(_) => todo!(),
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelIfOInhtype(inh_type) => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
                                     LanguageType::Procedure(_) => false,
-                                    LanguageType::Oop(o) => o.get_type() == LanguageType::Oop(OopLang{inh_type, dev_year: o.get_devyear()}),
+                                    LanguageType::Oop(o) => {
+                                        o.get_type()
+                                            == LanguageType::Oop(OopLang {
+                                                inh_type,
+                                                dev_year: o.get_devyear(),
+                                            })
+                                    }
                                     LanguageType::Functional(_) => todo!(),
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         CmdType::DelIfPAdt(adt) => {
-                            while let Some(index) = self.lang_list.iter().position(
-                                |x|
-                                match x.get_type() {
-                                    LanguageType::Procedure(p) => p.get_type() == LanguageType::Procedure(ProcedureLang{abstract_data_types: adt, dev_year: p.get_devyear()}),
+                            while let Some(index) =
+                                self.lang_list.iter().position(|x| match x.get_type() {
+                                    LanguageType::Procedure(p) => {
+                                        p.get_type()
+                                            == LanguageType::Procedure(ProcedureLang {
+                                                abstract_data_types: adt,
+                                                dev_year: p.get_devyear(),
+                                            })
+                                    }
                                     LanguageType::Oop(_) => false,
                                     LanguageType::Functional(_) => todo!(),
-                                }
-                            ) {
+                                })
+                            {
                                 self.lang_list.delete(index);
                             }
                         }
                         _ => {}
                     }
                 }
-                Err(_) => {},
+                Err(_) => {}
             }
         }
     }

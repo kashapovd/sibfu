@@ -1,4 +1,7 @@
-use crate::{token::{Token, TokenType}, entities::Language};
+use crate::{
+    entities::Language,
+    token::{Token, TokenType},
+};
 
 /// Transorm vector of token to vector of token types  
 /// # Arguments
@@ -20,9 +23,7 @@ pub fn vec_token_to_vec_token_type(tokens: &Vec<Token>) -> Vec<TokenType> {
 ///   The value that was popped
 pub fn pop_front_vec(mut vec: &mut Vec<Box<dyn Language>>) -> Option<Box<dyn Language>> {
     match vec.get(0) {
-        Some(_) => {
-            Some(vec.remove(0))
-        },
+        Some(_) => Some(vec.remove(0)),
         None => None,
     }
 }

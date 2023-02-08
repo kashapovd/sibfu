@@ -1,13 +1,14 @@
 use core::fmt::Debug;
-use std::{cmp::{Ordering, Eq}, fmt};
+use std::{
+    cmp::{Eq, Ordering},
+    fmt,
+};
 
-#[derive(Debug)]
-#[derive(Copy, Clone)]
-#[derive(PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum InheritanceType {
     Single,
     Multiple,
-    Interface
+    Interface,
 }
 
 impl std::fmt::Display for InheritanceType {
@@ -20,12 +21,11 @@ impl std::fmt::Display for InheritanceType {
     }
 }
 
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum LanguageType {
     Procedure(ProcedureLang),
     Oop(OopLang),
-    Functional(FuncLang)
+    Functional(FuncLang),
 }
 
 impl std::fmt::Display for LanguageType {
@@ -39,27 +39,24 @@ impl std::fmt::Display for LanguageType {
 }
 
 /// Represents Object Oriented Language object in program
-#[derive(Debug)]
-#[derive(PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd)]
 pub struct OopLang {
     pub inh_type: InheritanceType,
-    pub dev_year: i32
+    pub dev_year: i32,
 }
 
 /// Represents Procedure Language object in program
-#[derive(Debug)]
-#[derive(PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd)]
 pub struct ProcedureLang {
     pub abstract_data_types: bool,
-    pub dev_year: i32
+    pub dev_year: i32,
 }
 
 /// Represents Functional Language object in program
-#[derive(Debug)]
-#[derive(PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd)]
 pub struct FuncLang {
     pub purity_support: bool,
-    pub dev_year: i32
+    pub dev_year: i32,
 }
 
 impl ProcedureLang {
@@ -70,7 +67,10 @@ impl ProcedureLang {
     /// # Returns
     /// New `ProcedureLang` object
     pub fn new(abstract_data_types: bool, dev_year: i32) -> Self {
-        ProcedureLang { abstract_data_types, dev_year }
+        ProcedureLang {
+            abstract_data_types,
+            dev_year,
+        }
     }
 }
 
@@ -94,7 +94,10 @@ impl FuncLang {
     /// # Returns
     /// New `OopLang` object
     pub fn new(purity_support: bool, dev_year: i32) -> Self {
-        FuncLang { purity_support, dev_year }
+        FuncLang {
+            purity_support,
+            dev_year,
+        }
     }
 }
 
@@ -112,7 +115,10 @@ impl Language for OopLang {
         self.dev_year
     }
     fn get_type(&self) -> LanguageType {
-        LanguageType::Oop(OopLang { inh_type: self.inh_type, dev_year: self.dev_year })
+        LanguageType::Oop(OopLang {
+            inh_type: self.inh_type,
+            dev_year: self.dev_year,
+        })
     }
 }
 
@@ -122,7 +128,10 @@ impl Language for ProcedureLang {
         self.dev_year
     }
     fn get_type(&self) -> LanguageType {
-        LanguageType::Procedure(ProcedureLang { abstract_data_types: self.abstract_data_types, dev_year: self.dev_year })
+        LanguageType::Procedure(ProcedureLang {
+            abstract_data_types: self.abstract_data_types,
+            dev_year: self.dev_year,
+        })
     }
 }
 
@@ -131,7 +140,10 @@ impl Language for FuncLang {
         self.dev_year
     }
     fn get_type(&self) -> LanguageType {
-        LanguageType::Functional(FuncLang { purity_support: self.purity_support, dev_year: self.dev_year })
+        LanguageType::Functional(FuncLang {
+            purity_support: self.purity_support,
+            dev_year: self.dev_year,
+        })
     }
 }
 
@@ -139,9 +151,27 @@ impl Language for FuncLang {
 impl fmt::Display for dyn Language {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self.get_type() {
-            LanguageType::Procedure(p) => writeln!(f, "lang:\n\tType: {},\n\tSupport abstract types: {},\n\tYear of development: {}",  self.get_type(), p.abstract_data_types, p.dev_year),
-            LanguageType::Oop(o) => writeln!(f, "lang:\n\tType: {},\n\tType of inheritance: {},\n\tYear of development: {}",  self.get_type(), o.inh_type, o.dev_year),
-            LanguageType::Functional(func) => writeln!(f, "lang:\n\tType: {},\n\tSupport purity: {},\n\tYear of development: {}",  self.get_type(), func.purity_support, func.dev_year),
+            LanguageType::Procedure(p) => writeln!(
+                f,
+                "lang:\n\tType: {},\n\tSupport abstract types: {},\n\tYear of development: {}",
+                self.get_type(),
+                p.abstract_data_types,
+                p.dev_year
+            ),
+            LanguageType::Oop(o) => writeln!(
+                f,
+                "lang:\n\tType: {},\n\tType of inheritance: {},\n\tYear of development: {}",
+                self.get_type(),
+                o.inh_type,
+                o.dev_year
+            ),
+            LanguageType::Functional(func) => writeln!(
+                f,
+                "lang:\n\tType: {},\n\tSupport purity: {},\n\tYear of development: {}",
+                self.get_type(),
+                func.purity_support,
+                func.dev_year
+            ),
         }
     }
 }

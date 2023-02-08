@@ -1,13 +1,13 @@
-use std::{fs, env};
 use crate::interpreter::Interpenter;
+use std::{env, fs};
 
-mod lexer;
-mod token;
-mod interpreter;
-mod list;
-mod entities;
-mod parser;
 mod cmd;
+mod entities;
+mod interpreter;
+mod lexer;
+mod list;
+mod parser;
+mod token;
 mod utils;
 
 /// program entry point. Opens files and creates `Interpenter` object

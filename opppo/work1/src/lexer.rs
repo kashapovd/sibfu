@@ -6,7 +6,7 @@ pub struct Lexer {
     /// Contains vector of input chars
     content: Vec<char>,
     /// Contains current position that points to char
-    pos: usize
+    pos: usize,
 }
 
 impl Lexer {
@@ -18,7 +18,7 @@ impl Lexer {
     pub fn new(content: String) -> Self {
         Self {
             content: content.chars().collect(),
-            pos: 0
+            pos: 0,
         }
     }
     /// Process input string and creates tokens from
@@ -48,7 +48,7 @@ impl Lexer {
     }
     /// Tries to read a given char subset as word or number\
     /// # Returns
-    /// Tuple of result `String` and its start position in the input 
+    /// Tuple of result `String` and its start position in the input
     fn read_word_or_num(&mut self) -> (String, usize) {
         let mut buff: String = String::new();
         let keyword_pos = self.pos;
@@ -58,8 +58,7 @@ impl Lexer {
             let c = self.content.get(self.pos);
             if c.is_some() && c.unwrap().is_alphanumeric() {
                 buff.push(*c.unwrap());
-            }
-            else {
+            } else {
                 self.pos -= 1;
                 break;
             }
@@ -84,15 +83,27 @@ mod test {
         let mut l = Lexer::new("ADD".to_string());
         let tokens = l.tokenizator();
         assert_eq!(tokens.len(), 1);
-        assert_eq!(tokens.get(0), Some(Token::new(&"ADD".to_string(), 0)).as_ref());
-        assert_ne!(tokens.get(0), Some(Token::new(&"DOT".to_string(), 0)).as_ref());
+        assert_eq!(
+            tokens.get(0),
+            Some(Token::new(&"ADD".to_string(), 0)).as_ref()
+        );
+        assert_ne!(
+            tokens.get(0),
+            Some(Token::new(&"DOT".to_string(), 0)).as_ref()
+        );
     }
     #[test]
     fn tokenization_with_control_symbols() {
         let mut l = Lexer::new("\n\t\t\tADD\t\t\t".to_string());
         let tokens = l.tokenizator();
         assert_eq!(tokens.len(), 1);
-        assert_eq!(tokens.get(0), Some(Token::new(&"ADD".to_string(), 4)).as_ref());
-        assert_ne!(tokens.get(0), Some(Token::new(&"\nADD".to_string(), 4)).as_ref());
+        assert_eq!(
+            tokens.get(0),
+            Some(Token::new(&"ADD".to_string(), 4)).as_ref()
+        );
+        assert_ne!(
+            tokens.get(0),
+            Some(Token::new(&"\nADD".to_string(), 4)).as_ref()
+        );
     }
 }

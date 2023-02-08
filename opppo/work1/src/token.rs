@@ -1,9 +1,7 @@
 use crate::entities::InheritanceType;
 
-/// The set of all possible tokens 
-#[derive(PartialEq)]
-#[derive(Debug)]
-#[derive(Copy, Clone)]
+/// The set of all possible tokens
+#[derive(PartialEq, Debug, Copy, Clone)]
 pub enum TokenType {
     Sort,
     Flush,
@@ -23,19 +21,18 @@ pub enum TokenType {
     AdtInnerKeyword,
     InhtypeInnerKeyword,
     InhType,
-    Invalid
+    Invalid,
 }
 
 /// Represents token object in program
-#[derive(PartialEq)]
-#[derive(Debug)]
+#[derive(PartialEq, Debug)]
 pub struct Token {
     /// Contains token type
     pub ttype: TokenType,
     /// Token position in the input string
     pub start_pos: usize,
     /// A content of token
-    pub content: String
+    pub content: String,
 }
 
 impl Token {
@@ -49,7 +46,7 @@ impl Token {
         Self {
             ttype: Self::type_by_str(token_symbol.to_owned()),
             start_pos,
-            content: token_symbol.to_owned()
+            content: token_symbol.to_owned(),
         }
     }
     /// Try to parse a token content as int value
@@ -58,7 +55,7 @@ impl Token {
     pub fn parse_content_as_int(&self) -> Option<i32> {
         match self.content.parse::<i32>() {
             Ok(int32) => Some(int32),
-            Err(_) => None
+            Err(_) => None,
         }
     }
     /// Try to parse a token content as boolean value
@@ -68,10 +65,10 @@ impl Token {
         match self.content.to_lowercase().as_str() {
             "t" => Some(true),
             "f" => Some(false),
-            _ => None
+            _ => None,
         }
     }
-    /// Try to parse a token content as `InheritanceType` enum 
+    /// Try to parse a token content as `InheritanceType` enum
     /// # Returns
     /// `Option` of `InheritanceType` value
     pub fn parse_content_inh_type(&self) -> Option<InheritanceType> {
@@ -79,7 +76,7 @@ impl Token {
             "single" => Some(InheritanceType::Single),
             "multiple" => Some(InheritanceType::Multiple),
             "interface" => Some(InheritanceType::Interface),
-            _ => None
+            _ => None,
         }
     }
     /// Returns a token type
@@ -114,7 +111,7 @@ impl Token {
             "interface" => TokenType::InhType,
             "diff" => TokenType::Diff,
             _ if token.parse::<i32>().is_ok() => TokenType::Num,
-            _ => TokenType::Invalid
+            _ => TokenType::Invalid,
         }
     }
 }

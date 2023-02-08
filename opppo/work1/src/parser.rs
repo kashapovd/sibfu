@@ -5,9 +5,8 @@ use crate::token::Token;
 #[derive(Debug)]
 pub struct Parser {
     /// Vector of tokens to parse
-    input: Vec<Token>
+    input: Vec<Token>,
 }
-
 
 impl Parser {
     /// Contructs new parser object from a given vector of tokens
@@ -29,17 +28,17 @@ impl Parser {
                     let cmd = Command::new(&self.input);
                     match cmd {
                         Ok(cmd) => Ok(cmd),
-                        Err(err) => Err(err)
+                        Err(err) => Err(err),
                     }
-                } 
-                _ => {
-                    Err(format!("Unexpected error while unpacking a token stream in parser"))
-                }     
-            }  
+                }
+                _ => Err(format!(
+                    "Unexpected error while unpacking a token stream in parser"
+                )),
+            }
         } else {
             Err(format!("Source line cannot be empty"))
         }
-    }    
+    }
 }
 
 #[cfg(test)]
