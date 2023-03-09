@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">work02</string>
+    <string name="fnum">first number</string>
+    <string name="snum">second number</string>
+    <string name="calc">calculate!</string>
+    <string name="calc_error_msg">Please, enter the numbers</string>
+</resources>
