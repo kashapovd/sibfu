@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         val snum: EditText = findViewById(R.id.editTextTextPersonName2)
 
         button.setOnClickListener {
-            if (fnum.text.trim().isEmpty() or snum.text.trim().isEmpty()) {
+            if (!fnum.text.trim().toString().matches("""^-?[0-9]\d*(\.\d+)?$""".toRegex()) or
+                !snum.text.trim().toString().matches("""^-?[0-9]\d*(\.\d+)?$""".toRegex())
+            ) {
                 Toast.makeText(this@MainActivity, "Please, enter the numbers", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
