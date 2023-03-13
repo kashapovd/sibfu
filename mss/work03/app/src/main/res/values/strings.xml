@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">work02</string>
+    <string name="fnum">first number</string>
+    <string name="snum">second number</string>
+    <string name="calc_f1">sum!</string>
+    <string name="calc_f2">mul!</string>
+    <string name="sw">switch fragment</string>
+    <string name="calc_error_msg">Please, enter the numbers</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

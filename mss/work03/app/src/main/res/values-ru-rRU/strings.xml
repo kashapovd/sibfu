@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">работа02</string>
+    <string name="fnum">первое число</string>
+    <string name="calc_f1">сложить!</string>
+    <string name="calc_f2">умножить!</string>
+    <string name="sw">перекл. фрагмент</string>
+    <string name="calc_error_msg">Пожалуйста, введите числа</string>
+    <string name="snum">второе число</string>
+</resources>
