@@ -38,13 +38,6 @@ class sum : Fragment() {
                 Toast.makeText(activity, result.toString(), Toast.LENGTH_SHORT).show()
             }
         }
-        // Inflate the layout for this fragment
         return view
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
 }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.text.isDigitsOnly
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +20,8 @@ class MainActivity : AppCompatActivity() {
             if (!fnum.text.trim().toString().matches("""^-?[0-9]\d*(\.\d+)?$""".toRegex()) or
                 !snum.text.trim().toString().matches("""^-?[0-9]\d*(\.\d+)?$""".toRegex())
             ) {
-                Toast.makeText(this@MainActivity, "Please, enter the numbers", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, R.string.calc_error_msg,
+                                Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
